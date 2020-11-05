@@ -1,0 +1,17 @@
+server:
+  port: 9999
+  
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_gis
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1234
+    
+  devtools:
+    livereload:
+      enabled: true
+   
+logging:
+  level:
+    com.alaska.test: DEBUG
