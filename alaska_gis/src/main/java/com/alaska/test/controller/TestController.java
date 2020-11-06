@@ -63,7 +63,7 @@ public class TestController {
 
     //delete
 	@RequestMapping("/delete/{layer_num}")
-    private String boardDelete(int layer_num) throws Exception{
+    private String boardDelete(String[] layer_num) throws Exception{
         
         testService.deleteLayer(layer_num);
         
