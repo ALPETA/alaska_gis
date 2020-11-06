@@ -4,9 +4,38 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.alaska.test.mapper.TestMapper">
-    
-    <select id="getAll" resultType="com.alaska.test.dto.TestDto" >
-        SELECT *
+
+	<select id="getAll" resultType="com.alaska.test.dto.TestDto">
+		SELECT *
+		FROM alaska_layers
+		ORDER BY local_name ASC
+	</select>
+
+	<insert id="insertLayer"
+		parameterType="com.alaska.test.dto.TestDto">
+		INSERT INTO
+		alaska_layers (local_name, data_name)
+		VALUES(#{local_name},#{data_name})
+	</insert>
+
+	<delete id="deleteLayer" parameterType="int">
+		DELETE FROM alaska_layers WHERE layer_num in (#{layer_num})
+	</delete>
+	
+	 <select id="detailLayer" parameterType="int" resultType="com.alaska.test.dto.TestDto">
+        SELECT
+            *
         FROM alaska_layers
+        WHERE
+            layer_num = #{layer_num}
     </select>
+
+	<update id="updateLayer" parameterType="com.alaska.test.dto.TestDto">
+        UPDATE alaska_layers
+            SET
+            local_name = #{local_name},
+            data_name = #{data_name}
+        WHERE layer_num = #{layer_num}
+    </update>
+    
 </mapper>

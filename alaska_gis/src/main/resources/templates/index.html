@@ -57,13 +57,14 @@
 						<li class="sidebar-search">
 							<div class="input-group custom-search-form">
 								<span class="input-group-btn">
-									<button id="addlayer" class="btn btn-primary" type="button">
+									<button id="insertLayer" class="btn btn-primary" data-toggle="modal" data-target="#insertmodal">
 										추가
 									</button>
-									<button id="modifylayer" class="btn btn-info" type="button">
+									<button id="updateLayer" class="btn btn-info" data-toggle="modal" data-target="#updatemodal">
 										수정
 									</button>
-									<button id="deletelayer" class="btn btn-danger" type="button">
+									<button id="deleteLayer" class="btn btn-danger" type="button" 
+										onclick="location.href='/delete/${checked_number}'">
 										삭제
 									</button>
 								</span>
@@ -72,10 +73,9 @@
 						<ul>
 						<h3>Alaska</h3>
 						<hr>
-						<li>
-							<input type="checkbox">
-							<label>layer</label>
-							<i class="fa fa-gear fa-fw"></i>
+						<li th:each="list: ${list}">
+							<input th:value="${list.layer_num}" type="checkbox" name="checked_num" id="checked_num">
+							<label th:text="${list.local_name}"></label>
 						</li>
 						</ul>
 					</ul>
@@ -92,6 +92,63 @@
 
 	</div>
 	<!-- /#wrapper -->
+	
+	<!-- 레이어 수정 modal -->
+	<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
+                 </div>
+                 <form action="/updateProc">
+                    <div class="modal-body">
+                    	<div class="form-group">
+                    	<label>local name</label>
+                          <input class="form-control" placeholder="local name" id="local_name" name="local_name" type="text">
+                         </div>
+                         <div class="form-group">
+                        <label>data name</label>
+                          <input class="form-control" placeholder="data name" id="data_name" name="data_name" type="text">
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                          <input type="hidden" name="layer_num">
+                          <button type="submit" class="btn btn-primary">레이어 수정</button>
+                    </div>
+                 </form>
+            </div>
+		</div>
+	</div>
+	
+	<!-- 레이어 추가 modal -->
+	<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
+                 </div>
+                 <form action="insert">
+                    <div class="modal-body">
+                    	<div class="form-group">
+                    	<label>local name</label>
+                          <input class="form-control" placeholder="local name" id="local_name" name="local_name">
+                         </div>
+                         <div class="form-group">
+                        <label>data name</label>
+                          <input class="form-control" placeholder="data name" id="data_name" name="data_name">
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                          <button type="submit" class="btn btn-primary">레이어 추가</button>
+                    </div>
+                    </form>
+            </div>
+		</div>
+	</div>
 	<!-- jQuery -->
 	<script th:src="@{~/bootstrap/vendor/jquery/jquery.min.js}"></script>
 	<!-- Bootstrap Core JavaScript -->
@@ -107,5 +164,6 @@
 
 	<script th:src="@{~/ol/js/ol.js}"></script>
 	<script th:src="@{~/gis/js/main.js}"></script>
+	<script th:src="@{~/gis/js/index.js}"></script>
 </body>
 </html>
