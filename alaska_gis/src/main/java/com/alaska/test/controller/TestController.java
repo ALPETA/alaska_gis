@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,7 +46,7 @@ public class TestController {
     
     //update page
     @RequestMapping("/update/{layer_num}")
-    private String updatePage(int layer_num, Model model) throws Exception{
+    private String updatePage(@PathVariable int layer_num, Model model) throws Exception{
         
         model.addAttribute("detail", testService.detailLayer(layer_num));
         
@@ -63,7 +64,7 @@ public class TestController {
 
     //delete
 	@RequestMapping("/delete/{layer_num}")
-    private String boardDelete(String[] layer_num) throws Exception{
+    private String boardDelete(@PathVariable int layer_num) throws Exception{
         
         testService.deleteLayer(layer_num);
         

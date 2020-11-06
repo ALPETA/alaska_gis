@@ -21,6 +21,6 @@ public interface TestMapper {
 	public int updateLayer(TestDto testDto) throws Exception;
 
 	// delete
-	public int deleteLayer(String[] layer_num) throws Exception;
+	public int deleteLayer(int layer_num) throws Exception;
 
 }

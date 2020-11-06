@@ -38,7 +38,7 @@ public class TestService {
 	}
 
 	// delete
-	public int deleteLayer(String[] layer_num) throws Exception {
+	public int deleteLayer(int layer_num) throws Exception {
 
 		return testMapper.deleteLayer(layer_num);
 	}
