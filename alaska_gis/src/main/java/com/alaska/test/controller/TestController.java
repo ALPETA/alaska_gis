@@ -44,22 +44,18 @@ public class TestController {
         return "redirect:/";
     }
     
-    //update page
-    @RequestMapping("/update/{layer_num}")
-    private String updatePage(@PathVariable int layer_num, Model model) throws Exception{
-        
-        model.addAttribute("detail", testService.detailLayer(layer_num));
-        
-        return "update";
-    }
-    
     //update
     @RequestMapping("/updateProc")
-    private int boardUpdateProc(HttpServletRequest request) throws Exception{
-        
-    	TestDto testDto = (TestDto) request.getParameterMap();
-        
-        return testService.updateLayer(testDto);
+    private String boardUpdateProc(HttpServletRequest request) throws Exception{
+    	
+    	TestDto testDto = new TestDto();
+    	testDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
+    	testDto.setLocal_name(request.getParameter("update_local_name"));
+    	testDto.setData_name(request.getParameter("update_data_name"));
+         
+    	testService.updateLayer(testDto);
+         
+         return "redirect:/";
     }
 
     //delete
