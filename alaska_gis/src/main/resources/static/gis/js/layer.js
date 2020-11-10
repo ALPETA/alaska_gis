@@ -14,6 +14,7 @@
 
 	console.log(send_array);
 });*/
+
 var alaska_layer_group = new ol.layer.Group();
 
 $(document).ready(function() {
@@ -22,11 +23,15 @@ $(document).ready(function() {
 
 	for (i = 0; i < checked_layer.length; i++) {
 		send_array[i] = newVectorLayer(checked_layer[i].value,checked_layer[i].value);
+		
+		//group에 넣기
 		alaska_layer_group.getLayers().push(send_array[i]);
+		alaska_layer_group.set
 	}
 
 });
 
+//레이어 생성 function
 function newVectorLayer(layerName, geoServerLayer) {
 	return new ol.layer.Vector({
 		layerName: layerName,
@@ -44,6 +49,7 @@ function newVectorLayer(layerName, geoServerLayer) {
 			},
 			strategy: ol.loadingstrategy.bbox,
 		}),
+		visible:false,
 	})
 }
 
@@ -57,8 +63,8 @@ var map = new ol.Map({
 	layers: [raster, alaska_layer_group],
 	target: document.getElementById('map'),
 	view: new ol.View({
-		center: [0, 0],
+		center: new ol.proj.fromLonLat([-150.28, 60.68]),
 		maxZoom: 19,
-		zoom: 0,
+		zoom: 7,
 	}),
 });
