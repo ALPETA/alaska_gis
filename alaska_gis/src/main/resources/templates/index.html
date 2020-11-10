@@ -69,7 +69,7 @@
 							<hr>
 							<li th:each="list: ${list}"><input
 								th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
-								id="checked_layer" class="checkSelect" checked> <label th:text="${list.local_name}"></label>
+								id="checked_layer" class="checkSelect"> <label th:text="${list.local_name}"></label>
 								<span class="input-group-btn">
 									<button id="updateLayer" name="updatelayer" class="btn btn-info" 
 										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}" >
@@ -121,7 +121,6 @@
 						<input type="hidden" name="update_layer_num" id="update_layer_num" value="">
 					</div>
 					<div class="modal-footer">
-						<input type="hidden" id="update_layer_num" name="update_layer_num">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 						<button type="submit" class="btn btn-primary" id="modalsubmit">레이어 수정</button>
 					</div>
@@ -175,6 +174,6 @@
     
 	<script th:src="@{~/ol/js/ol.js}"></script>
 	<script th:src="@{~/gis/js/index.js}"></script>
-	<script th:src="@{~/gis/js/main.js}"></script>
+	<script th:src="@{~/gis/js/layer.js}"></script>
 </body>
 </html>
