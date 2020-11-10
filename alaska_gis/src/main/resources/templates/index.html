@@ -68,8 +68,8 @@
 							<h3>Alaska</h3>
 							<hr>
 							<li th:each="list: ${list}"><input
-								th:value="${list.layer_num}" type="checkbox" name="checked_num"
-								id="checked_num"> <label th:text="${list.local_name}"></label>
+								th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
+								id="checked_layer" class="checkSelect" checked> <label th:text="${list.local_name}"></label>
 								<span class="input-group-btn">
 									<button id="updateLayer" name="updatelayer" class="btn btn-info" 
 										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}" >
@@ -88,6 +88,8 @@
 
 		<div id="page-wrapper">
 			<div id="map" class="map"></div>
+			<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> 
+			<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>
 		</div>
 		<!-- /#page-wrapper -->
 

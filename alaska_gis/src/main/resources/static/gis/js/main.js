@@ -1,27 +1,38 @@
-var vectorSource = new ol.source.Vector({
-	format: new ol.format.GeoJSON(),
-	url: function(extent) {
-		return (
-			'http://localhost:8088/geoserver/test/wfs?service=WFS&' +
-			'version=1.1.0&request=GetFeature&typename=test:Boundary&' +
-			'outputFormat=application/json&srsname=EPSG:3857&' +
-			'bbox=' +
-			extent.join(',') +
-			',EPSG:3857'
-		);
-	},
-	strategy: ol.loadingstrategy.bbox,
+
+var send_array = Array();
+var send_cnt = 0;
+
+for (i = 0; i < checked_layer.length; i++) {
+	if (checked_layer[i].checked == true) {
+		send_array[send_cnt] = checked_layer[i].value;
+		send_cnt++;
+	}
+}
+
+$("#array").val(send_array);
+
+var alaska_layer_group = new ol.layer.Group({
+	layers: [
+		new ol.layer.Vector({
+			layerName: '',
+			source: new ol.source.Vector({
+				format: new ol.format.GeoJSON(),
+				url: function(extent) {
+					return (
+						'http://localhost:8088/geoserver/test/wfs?service=WFS&' +
+						'version=1.1.0&request=GetFeature&typename=test:Boundary,test:Electrical_Lines' +
+						'&outputFormat=application/json&srsname=EPSG:3857&' +
+						'bbox=' +
+						extent.join(',') +
+						',EPSG:3857'
+					);
+				},
+				strategy: ol.loadingstrategy.bbox,
+			}),
+		}),
+	]
 });
 
-var vector = new ol.layer.Vector({
-	source: vectorSource,
-	style: new ol.style.Style({
-		stroke: new ol.style.Stroke({
-			color: 'rgba(0, 0, 255, 1.0)',
-			width: 2,
-		}),
-	}),
-});
 
 var raster = new ol.layer.Tile({
 	source: new ol.source.XYZ({
@@ -30,7 +41,7 @@ var raster = new ol.layer.Tile({
 });
 
 var map = new ol.Map({
-	layers: [raster, vector],
+	layers: [raster, alaska_layer_group],
 	target: document.getElementById('map'),
 	view: new ol.View({
 		center: [0, 0],
