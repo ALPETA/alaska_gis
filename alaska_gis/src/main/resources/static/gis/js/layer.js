@@ -1,39 +1,68 @@
 var alaska_layer_group = new ol.layer.Group();
 
 //레이어 alaska_layer_group에 탑재
-	var send_array = Array();
+var send_array = Array();
 $(document).ready(function() {
 	var checked_layer = $(".checkSelect");
 
 	for (i = 0; i < checked_layer.length; i++) {
-		send_array[i] = newVectorLayer(checked_layer[i].value,checked_layer[i].value);
-		
+		send_array[i] = newVectorLayer(checked_layer[i].value, checked_layer[i].value);
+
 		//group에 넣기
 		alaska_layer_group.getLayers().push(send_array[i]);
 	}
-	
-	
-	//checkbox 체크여부에 따른 setVisible 처리
+
+
+	//checkbox 체크 여부에 따른 setVisible 처리
 	$(".checkSelect").change(function() {
-		var checked_layer = $(".checkSelect");
-		console.log($(this).attr("class").split(" ")[1])
-		if($(this).attr("class").split(" ")[1] == "active") {
-			for(var i = 0; i < send_array.length; i++) {
-				if(send_array[i].values_.layerName == $(this).val()) {
+		if ($(this).attr("class").split(" ")[1] == "active") {
+			for (var i = 0; i < send_array.length; i++) {
+				if (send_array[i].values_.layerName == $(this).val()) {
 					send_array[i].setVisible(false)
 				}
 			}
 			$(this).removeClass("active")
-		}else {
-			for(var i = 0; i < send_array.length; i++) {
-				if(send_array[i].values_.layerName == $(this).val()) {
+		} else {
+			for (var i = 0; i < send_array.length; i++) {
+				if (send_array[i].values_.layerName == $(this).val()) {
 					send_array[i].setVisible(true)
 				}
 			}
 			$(this).addClass("active")
 		}
-	
+
 	});
+
+	//레이어 전체 선택/해제 여부에 따른 setVisible 처리
+	$("#allCheckbox").change(function() {
+		var checked_layer = $(".checkSelect");
+
+		if ($("#allCheckbox").prop("checked")) {
+			$("input[type=checkbox]").prop("checked", true);
+			for (i = 0; i < checked_layer.length; i++) {
+				for (var i = 0; i < send_array.length; i++) {
+					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
+						send_array[i].setVisible(true)
+
+					}
+				}
+				$(checked_layer[i]).addClass("active")
+			}
+		}
+		else {
+			$("input[type=checkbox]").prop("checked", false);
+			for (i = 0; i < checked_layer.length; i++) {
+				for (var i = 0; i < send_array.length; i++) {
+					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
+						send_array[i].setVisible(false)
+
+					}
+				}
+				$(checked_layer[i]).removeClass("active")
+			}
+		}
+	}
+	)
 
 });
 
@@ -55,7 +84,7 @@ function newVectorLayer(layerName, geoServerLayer) {
 			},
 			strategy: ol.loadingstrategy.bbox,
 		}),
-		visible:false,
+		visible: false,
 	})
 }
 

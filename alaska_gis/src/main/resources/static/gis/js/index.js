@@ -15,10 +15,10 @@ $(document).ready(function() {
 	//layer delete
 	$("button[name='deleteLayer']").click(function() {
 		var layernum = this.value;
-		
+
 		if (confirm("해당 레이어를 삭제하시겠습니까??") == true) {
 			alert("삭제되었습니다.");
-			location.href="/delete/"+layernum;
+			location.href = "/delete/" + layernum;
 		} else {
 			return false;
 		}

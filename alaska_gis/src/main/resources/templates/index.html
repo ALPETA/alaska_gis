@@ -62,8 +62,8 @@
 							</div> <!-- /input-group -->
 						</li>
 						<ul class="leftCol">
-							<h3>Alaska</h3>
-							<hr>
+								<h3><input type="checkbox" name="allCheckbox" id="allCheckbox" class="checkSelect"> Alaska</h3>
+								<hr>
 							<li th:each="list: ${list}">
 								<input th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
 									id="checked_layer" class="checkSelect" data-value=""> 
