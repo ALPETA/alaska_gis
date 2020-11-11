@@ -1,24 +1,8 @@
-/*$(".checkSelect").change(function() {
-	var send_array = Array();
-	var send_cnt = 0;
-	var checked_layer = $(".checkSelect");
-
-	for (i = 0; i < checked_layer.length; i++) {
-		if (checked_layer[i].checked == true) {
-			send_array[send_cnt] = checked_layer[i].value;
-			send_cnt++;
-		}
-	}
-
-	$("#array").val(send_array);
-
-	console.log(send_array);
-});*/
-
 var alaska_layer_group = new ol.layer.Group();
 
-$(document).ready(function() {
+//레이어 alaska_layer_group에 탑재
 	var send_array = Array();
+$(document).ready(function() {
 	var checked_layer = $(".checkSelect");
 
 	for (i = 0; i < checked_layer.length; i++) {
@@ -26,8 +10,30 @@ $(document).ready(function() {
 		
 		//group에 넣기
 		alaska_layer_group.getLayers().push(send_array[i]);
-		alaska_layer_group.set
 	}
+	
+	
+	//checkbox 체크여부에 따른 setVisible 처리
+	$(".checkSelect").change(function() {
+		var checked_layer = $(".checkSelect");
+		console.log($(this).attr("class").split(" ")[1])
+		if($(this).attr("class").split(" ")[1] == "active") {
+			for(var i = 0; i < send_array.length; i++) {
+				if(send_array[i].values_.layerName == $(this).val()) {
+					send_array[i].setVisible(false)
+				}
+			}
+			$(this).removeClass("active")
+		}else {
+			for(var i = 0; i < send_array.length; i++) {
+				if(send_array[i].values_.layerName == $(this).val()) {
+					send_array[i].setVisible(true)
+				}
+			}
+			$(this).addClass("active")
+		}
+	
+	});
 
 });
 
@@ -68,3 +74,6 @@ var map = new ol.Map({
 		zoom: 7,
 	}),
 });
+
+
+

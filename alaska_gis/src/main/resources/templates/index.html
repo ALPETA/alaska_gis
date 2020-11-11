@@ -69,7 +69,7 @@
 							<hr>
 							<li th:each="list: ${list}"><input
 								th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
-								id="checked_layer" class="checkSelect"> <label th:text="${list.local_name}"></label>
+								id="checked_layer" class="checkSelect" data-value=""> <label th:text="${list.local_name}"></label>
 								<span class="input-group-btn">
 									<button id="updateLayer" name="updatelayer" class="btn btn-info" 
 										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}" >
