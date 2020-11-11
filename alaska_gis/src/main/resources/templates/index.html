@@ -29,7 +29,7 @@
 <style>
 .map {
 	width: 100%;
-	height: 700px;
+	height: 650px;
 }
 </style>
 
@@ -64,20 +64,21 @@
 								</span>
 							</div> <!-- /input-group -->
 						</li>
-						<ul>
+						<ul class="leftCol">
 							<h3>Alaska</h3>
 							<hr>
 							<li th:each="list: ${list}"><input
 								th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
 								id="checked_layer" class="checkSelect" data-value=""> <label th:text="${list.local_name}"></label>
 								<span class="input-group-btn">
-									<button id="updateLayer" name="updatelayer" class="btn btn-info" 
+									<button id="updateLayer" name="updatelayer" class="btn btn-info btn-sm" 
 										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}" >
 										수정</button>
-									<button id="deleteLayer" class="btn btn-danger" 
+									<button id="deleteLayer" class="btn btn-danger btn-sm" 
 										th:onclick="location.href='/delete/[[${list.layer_num}]]'">
 										삭제</button>
-							</span></li>
+								</span>
+							</li>
 						</ul>
 					</ul>
 				</div>
