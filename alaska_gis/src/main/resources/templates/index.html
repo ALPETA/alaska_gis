@@ -56,27 +56,27 @@
 					<ul class="nav" id="side-menu">
 						<li class="sidebar-search">
 							<div class="input-group custom-search-form">
-								<span class="input-group-btn">
 									<button id="insertLayer" class="btn btn-primary"
 										data-toggle="modal" data-target="#insertmodal">
 										레이어 추가</button>
-
-								</span>
 							</div> <!-- /input-group -->
 						</li>
 						<ul class="leftCol">
 							<h3>Alaska</h3>
 							<hr>
-							<li th:each="list: ${list}"><input
-								th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
-								id="checked_layer" class="checkSelect" data-value=""> <label th:text="${list.local_name}"></label>
+							<li th:each="list: ${list}">
+								<input th:value="${list.data_name}" type="checkbox" name="checked_layer[]"
+									id="checked_layer" class="checkSelect" data-value=""> 
+								<label th:text="${list.local_name}"></label>
 								<span class="input-group-btn">
 									<button id="updateLayer" name="updatelayer" class="btn btn-info btn-sm" 
 										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}" >
-										수정</button>
-									<button id="deleteLayer" class="btn btn-danger btn-sm" 
-										th:onclick="location.href='/delete/[[${list.layer_num}]]'">
-										삭제</button>
+										레이어 수정</button>
+									<button id="deleteLayer" name="deleteLayer" class="btn btn-danger btn-sm" 
+										th:value="${list.layer_num}">레이어 삭제</button>
+									<button id="changeStyle" class="btn btn-success btn-sm">
+										<i class="fa fa-gear"></i>
+									</button>
 								</span>
 							</li>
 						</ul>
@@ -107,7 +107,7 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
 				</div>
-				<form action="/updateProc">
+				<form action="/updateProc" th:onsubmit="return validateupdateForm()" name="updateForm">
 					<div class="modal-body">
 						<div class="form-group">
 							<label>local name</label> <input class="form-control"
@@ -140,7 +140,8 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
 				</div>
-				<form action="insert">
+				<div class="form">
+				<form action="insert" th:onsubmit="return validateinsertForm()" name="insertForm">
 					<div class="modal-body">
 						<div class="form-group">
 							<label>local name</label> <input class="form-control"
@@ -156,6 +157,7 @@
 						<button type="submit" class="btn btn-primary">레이어 추가</button>
 					</div>
 				</form>
+				</div>
 			</div>
 		</div>
 	</div>
