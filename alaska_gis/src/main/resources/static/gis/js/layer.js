@@ -20,6 +20,7 @@ $(document).ready(function() {
 			for (var i = 0; i < send_array.length; i++) {
 				if (send_array[i].values_.layerName == $(this).val()) {
 					send_array[i].setVisible(false)
+					$("#allCheckbox").prop("checked", false);
 				}
 			}
 			$(this).removeClass("active")
