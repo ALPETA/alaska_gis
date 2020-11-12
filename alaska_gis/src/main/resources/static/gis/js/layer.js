@@ -1,6 +1,9 @@
+//레이어 그룹
 var alaska_layer_group = new ol.layer.Group();
 
+//개별 레이어 Array
 var send_array = Array();
+
 $(document).ready(function() {
 
 	//레이어 alaska_layer_group에 탑재
@@ -97,17 +100,21 @@ function newVectorLayer(layerName, geoServerLayer) {
 	})
 }
 
+//Tile Layer
 var raster = new ol.layer.Tile({
 	source: new ol.source.XYZ({
+		attributions:'<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a>' + 
+					' <a href="https://www.openstreetmap.org/copyright">&copy; OpenStreetMap contributors</a>',
 		url: 'https://api.maptiler.com/maps/outdoor/256/{z}/{x}/{y}@2x.png?key=hVTaF7m7fWw8xKcPSNzr',
 	}),
 });
 
+//Accessible Map 
 var map = new ol.Map({
 	layers: [raster, alaska_layer_group],
 	target: document.getElementById('map'),
 	view: new ol.View({
-		center: new ol.proj.fromLonLat([-150.28, 60.68]),
+		center: new ol.proj.fromLonLat([-151, 60.68]),
 		maxZoom: 19,
 		zoom: 7,
 	}),
