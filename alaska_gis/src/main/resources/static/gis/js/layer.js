@@ -1,8 +1,9 @@
 var alaska_layer_group = new ol.layer.Group();
 
-//레이어 alaska_layer_group에 탑재
 var send_array = Array();
 $(document).ready(function() {
+
+	//레이어 alaska_layer_group에 탑재
 	var checked_layer = $(".checkSelect");
 
 	for (i = 0; i < checked_layer.length; i++) {
@@ -35,34 +36,40 @@ $(document).ready(function() {
 
 	//레이어 전체 선택/해제 여부에 따른 setVisible 처리
 	$("#allCheckbox").change(function() {
-		var checked_layer = $(".checkSelect");
-
 		if ($("#allCheckbox").prop("checked")) {
 			$("input[type=checkbox]").prop("checked", true);
 			for (i = 0; i < checked_layer.length; i++) {
 				for (var i = 0; i < send_array.length; i++) {
 					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
-						send_array[i].setVisible(true)
-
+						if ($(checked_layer[i]).attr("class").split(" ")[1] == "active") {
+							continue;
+						}
+						else {
+							send_array[i].setVisible(true)
+							$(checked_layer[i]).addClass("active")
+						}
 					}
 				}
-				$(checked_layer[i]).addClass("active")
 			}
 		}
+
 		else {
 			$("input[type=checkbox]").prop("checked", false);
 			for (i = 0; i < checked_layer.length; i++) {
 				for (var i = 0; i < send_array.length; i++) {
 					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
-						send_array[i].setVisible(false)
-
+						if ($(checked_layer[i]).attr("class").split(" ")[1] == "active") {
+							send_array[i].setVisible(false)
+							$(checked_layer[i]).removeClass("active")
+						}
+						else {
+							continue;
+						}
 					}
 				}
-				$(checked_layer[i]).removeClass("active")
 			}
 		}
-	}
-	)
+	});
 
 });
 
