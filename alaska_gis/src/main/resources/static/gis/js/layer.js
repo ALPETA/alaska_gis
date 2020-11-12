@@ -21,6 +21,7 @@ $(document).ready(function() {
 				if (send_array[i].values_.layerName == $(this).val()) {
 					send_array[i].setVisible(false)
 					$("#allCheckbox").prop("checked", false);
+					$("#allCheckbox").removeClass("active");
 				}
 			}
 			$(this).removeClass("active")
