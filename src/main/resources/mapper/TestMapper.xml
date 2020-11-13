@@ -8,8 +8,14 @@
 	<select id="getAll" resultType="com.alaska.test.dto.TestDto">
 		SELECT *
 		FROM alaska_layers
-		ORDER BY local_name ASC
+		ORDER
+		BY local_name ASC
 	</select>
+
+	<!--getAll raster -->
+	<!--getAll polygon -->
+	<!--getAll point -->
+	<!--getAll line -->
 
 	<insert id="insertLayer"
 		parameterType="com.alaska.test.dto.TestDto">
@@ -18,24 +24,46 @@
 		VALUES(#{local_name},#{data_name})
 	</insert>
 
-	<delete id="deleteLayer" parameterType="int">
-		DELETE FROM alaska_layers WHERE layer_num IN (#{layer_num})
-	</delete>
-	
-	 <select id="detailLayer" parameterType="int" resultType="com.alaska.test.dto.TestDto">
-        SELECT
-            *
-        FROM alaska_layers
-        WHERE
-            layer_num = #{layer_num}
-    </select>
+	<!--insert into raster -->
+	<!--insert into polygon -->
+	<!--insert into point -->
+	<!--insert into line -->
 
-	<update id="updateLayer" parameterType="com.alaska.test.dto.TestDto">
-        UPDATE alaska_layers
-            SET
-            local_name = #{local_name},
-            data_name = #{data_name}
-        WHERE layer_num = #{layer_num}
-    </update>
-    
+	<delete id="deleteLayer" parameterType="int">
+		DELETE FROM alaska_layers
+		WHERE layer_num IN (#{layer_num})
+	</delete>
+
+	<!--delete from raster -->
+	<!--delete from polygon -->
+	<!--delete from point -->
+	<!--delete from line -->
+
+	<select id="detailLayer" parameterType="int"
+		resultType="com.alaska.test.dto.TestDto">
+		SELECT *
+		FROM alaska_layers
+		WHERE
+		layer_num = #{layer_num}
+	</select>
+
+	<!--raster layer detail -->
+	<!--polygon layer detail -->
+	<!--point layer detail -->
+	<!--line layer detail -->
+
+	<update id="updateLayer"
+		parameterType="com.alaska.test.dto.TestDto">
+		UPDATE alaska_layers
+		SET
+		local_name = #{local_name},
+		data_name = #{data_name}
+		WHERE layer_num = #{layer_num}
+	</update>
+
+	<!--update raster -->
+	<!--update polygon -->
+	<!--update point -->
+	<!--update line -->
+
 </mapper>

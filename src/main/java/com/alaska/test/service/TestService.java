@@ -19,11 +19,27 @@ public class TestService {
 		return testMapper.getAll();
 	}
 
+	// raster list
+
+	// polygon list
+
+	// point list
+
+	// line list
+
 	// insert
 	public int insertLayer(TestDto testDto) throws Exception {
 
 		return testMapper.insertLayer(testDto);
 	}
+
+	// insert into raster
+
+	// insert into polygon
+
+	// insert into point
+
+	// insert into line
 
 	// layer detail
 	public TestDto detailLayer(int layer_num) throws Exception {
@@ -31,16 +47,40 @@ public class TestService {
 		return testMapper.detailLayer(layer_num);
 	}
 
+	// raster layer detail
+
+	// polygon layer detail
+
+	// point layer detail
+
+	// line layer detail
+
 	// update
 	public int updateLayer(TestDto testDto) throws Exception {
 
 		return testMapper.updateLayer(testDto);
 	}
 
+	// update raster layer
+
+	// update polygon layer
+
+	// update point layer
+
+	// update line layer
+
 	// delete
 	public int deleteLayer(int layer_num) throws Exception {
 
 		return testMapper.deleteLayer(layer_num);
 	}
+
+	// delete from raster layer
+
+	// delete from polygon layer
+
+	// delete from point layer
+
+	// delete from line layer
 
 }
