@@ -38,7 +38,7 @@ public class TestController {
 		// line
 		model.addAttribute("line", testService.getLine());
 
-		model.addAttribute("list", testService.getAll());
+		//model.addAttribute("list", testService.getAll());
 		
 		return "index";
 	}
@@ -90,7 +90,7 @@ public class TestController {
 	}
 
 	// insert into point
-	@RequestMapping("/insert/polygon")
+	@RequestMapping("/insert/point")
 	private String boardInsertPoint(HttpServletRequest request) throws Exception {
 
 		PointDto pointDto = new PointDto();
@@ -104,7 +104,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// insert into line
+	// insert into line 
 	@RequestMapping("/insert/line")
 	private String boardInsertLine(HttpServletRequest request) throws Exception {
 
@@ -136,7 +136,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update raster layer
+	// update raster layer name
 	@RequestMapping("/update/raster/name")
 	private String boardUpdateRaster(HttpServletRequest request) throws Exception {
 
@@ -150,7 +150,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update polygon layer
+	// update polygon layer name
 	@RequestMapping("/update/polygon/name")
 	private String boardUpdatePolygon(HttpServletRequest request) throws Exception {
 
@@ -164,7 +164,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update point layer
+	// update point layer name
 	@RequestMapping("/update/point/name")
 	private String boardUpdatePoint(HttpServletRequest request) throws Exception {
 
@@ -178,7 +178,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update line layer
+	// update line layer name
 	@RequestMapping("/update/line/name")
 	private String boardUpdateLine(HttpServletRequest request) throws Exception {
 
@@ -195,7 +195,7 @@ public class TestController {
 	
 	
 
-	// update polygon style
+	// update polygon layer style
 	@RequestMapping("/update/polygon/style")
 	private String boardUpdatePolygonStyle(HttpServletRequest request) throws Exception {
 
@@ -212,8 +212,8 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update point style
-	@RequestMapping("/update/line/style")
+	// update point layer style
+	@RequestMapping("/update/point/style")
 	private String boardUpdatePointStyle(HttpServletRequest request) throws Exception {
 
 		PointDto pointDto = new PointDto();
@@ -229,7 +229,7 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	// update line style
+	// update line layer style
 	@RequestMapping("/update/line/style")
 	private String boardUpdateLineStyle(HttpServletRequest request) throws Exception {
 

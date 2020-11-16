@@ -118,25 +118,25 @@ public class TestService{
 		return testMapper.updateLayer(testDto);
 	}
 
-	// update raster layer
+	// update raster layer name
 	public int updateRaster(RasterDto rasterDto) throws Exception {
 
 		return testMapper.updateRaster(rasterDto);
 	}
 
-	// update polygon layer
+	// update polygon layer name
 	public int updatePolygon(PolygonDto polygonDto) throws Exception {
 
 		return testMapper.updatePolygon(polygonDto);
 	}
 
-	// update point layer
+	// update point layer name
 	public int updatePoint(PointDto pointDto) throws Exception {
 
 		return testMapper.updatePoint(pointDto);
 	}
 
-	// update line layer
+	// update line layer name
 	public int updateLine(LineDto lineDto) throws Exception {
 
 		return testMapper.updateLine(lineDto);
@@ -145,19 +145,19 @@ public class TestService{
 	
 	
 	
-	//update polygon style
+	//update polygon layer style
 	public int updatePolygonStyle(PolygonDto polygonDto) throws Exception {
 
 		return testMapper.updatePolygonStyle(polygonDto);
 	}
 	
-	//update point style
+	//update point layer style
 	public int updatePointStyle(PointDto pointDto) throws Exception {
 
 		return testMapper.updatePointStyle(pointDto);
 	}
 	
-	//update line style
+	//update line layer style
 	public int updateLineStyle(LineDto lineDto) throws Exception {
 
 		return testMapper.updateLineStyle(lineDto);

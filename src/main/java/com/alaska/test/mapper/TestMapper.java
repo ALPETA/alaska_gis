@@ -69,28 +69,28 @@ public interface TestMapper {
 	// update
 	public int updateLayer(TestDto testDto) throws Exception;
 	
-	//update raster layer
+	//update raster layer name
 	public int updateRaster(RasterDto rasterDto) throws Exception;
 	
-	//update polygon layer
+	//update polygon layer name
 	public int updatePolygon(PolygonDto polygonDto) throws Exception;
 	
-	//update point layer
+	//update point layer name
 	public int updatePoint(PointDto pointDto) throws Exception;
 	
-	//update line layer
+	//update line layer name
 	public int updateLine(LineDto lineDto) throws Exception;
 
 	
 	
 	
-	//update polygon style
+	//update polygon layer style
 	public int updatePolygonStyle(PolygonDto polygonDto) throws Exception;
 	
-	//update point style
+	//update point layer style
 	public int updatePointStyle(PointDto pointDto) throws Exception;
 	
-	//update line style
+	//update line layer style
 	public int updateLineStyle(LineDto lineDto) throws Exception;
 	
 	

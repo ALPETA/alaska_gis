@@ -140,7 +140,7 @@
 	
 	<!--point layer detail -->
 	<select id="detailPoint" parameterType="int"
-		resultType="com.alaska.test.dto.PointsDto">
+		resultType="com.alaska.test.dto.PointDto">
 		SELECT *
 		FROM alaska_points
 		WHERE

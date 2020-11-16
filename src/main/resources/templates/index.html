@@ -68,22 +68,32 @@
 									class="checkSelect"> Alaska
 							</h3>
 							<hr>
-							<li th:each="list: ${list}"><input
-								th:value="${list.data_name}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect"
-								data-value=""> <label th:text="${list.local_name}"></label>
+							
+							<li th:each="raster: ${raster}"><input
+								th:value="${raster.data_name}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label th:text="${raster.local_name}"></label>
+								
 								<span class="input-group-btn">
+								
 									<button id="updateLayer" name="updatelayer"
 										class="btn btn-info btn-sm"
-										th:value="${list.layer_num}+','+${list.local_name}+','+${list.data_name}">
+										th:value="${raster.local_name}+','+${raster.data_name}">
 										레이어 수정</button>
+										
 									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" th:value="${list.layer_num}">레이어
-										삭제</button>
+										class="btn btn-danger btn-sm" th:value="${raster.local_name}">
+										레이어 삭제</button>
+										
+									<!--style 변경-->	
 									<button id="changeStyle" class="btn btn-success btn-sm">
 										<i class="fa fa-gear"></i>
 									</button>
-							</span></li>
+									
+								</span>
+							</li>
+							
 						</ul>
 					</ul>
 				</div>
