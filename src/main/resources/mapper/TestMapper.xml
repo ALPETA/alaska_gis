@@ -13,21 +13,75 @@
 	</select>
 
 	<!--getAll raster -->
+	<select id="getRaster" resultType="com.alaska.test.dto.RasterDto">
+		SELECT *
+		FROM alaska_raster
+		ORDER
+		BY local_name ASC
+	</select>
+	
 	<!--getAll polygon -->
+	<select id="getPolygon" resultType="com.alaska.test.dto.PolygonDto">
+		SELECT *
+		FROM alaska_polygons
+		ORDER
+		BY local_name ASC
+	</select>
+	
 	<!--getAll point -->
+	<select id="getPoint" resultType="com.alaska.test.dto.PointDto">
+		SELECT *
+		FROM alaska_points
+		ORDER
+		BY local_name ASC
+	</select>
+	
 	<!--getAll line -->
+	<select id="getLine" resultType="com.alaska.test.dto.LineDto">
+		SELECT *
+		FROM alaska_lines
+		ORDER
+		BY local_name ASC
+	</select>
 
 	<insert id="insertLayer"
 		parameterType="com.alaska.test.dto.TestDto">
 		INSERT INTO
-		alaska_layers (local_name, data_name)
+		alaska_layers (local_name, data_name, )
 		VALUES(#{local_name},#{data_name})
 	</insert>
 
 	<!--insert into raster -->
+	<insert id="insertRaster"
+		parameterType="com.alaska.test.dto.RasterDto">
+		INSERT INTO
+		alaska_Raster (local_name, data_name)
+		VALUES(#{local_name},#{data_name})
+	</insert>
+	
 	<!--insert into polygon -->
+	<insert id="insertPolygon"
+		parameterType="com.alaska.test.dto.PolygonDto">
+		INSERT INTO
+		alaska_Polygons (local_name, data_name, fill_color)
+		VALUES(#{local_name},#{data_name},#{fill_color})
+	</insert>
+	
 	<!--insert into point -->
+	<insert id="insertPoint"
+		parameterType="com.alaska.test.dto.PointDto">
+		INSERT INTO
+		alaska_Points (local_name, data_name, fill_color)
+		VALUES(#{local_name},#{data_name},#{fill_color})
+	</insert>
+	
 	<!--insert into line -->
+	<insert id="insertLine"
+		parameterType="com.alaska.test.dto.LineDto">
+		INSERT INTO
+		alaska_Lines (local_name, data_name, line_color)
+		VALUES(#{local_name},#{data_name},#{line_color})
+	</insert>
 
 	<delete id="deleteLayer" parameterType="int">
 		DELETE FROM alaska_layers
@@ -35,9 +89,28 @@
 	</delete>
 
 	<!--delete from raster -->
+	<delete id="deleteRaster" parameterType="int">
+		DELETE FROM alaska_raster
+		WHERE local_name IN (#{local_name})
+	</delete>
+	
 	<!--delete from polygon -->
+	<delete id="deletePolygon" parameterType="int">
+		DELETE FROM alaska_polygons
+		WHERE local_name IN (#{local_name})
+	</delete>
+	
 	<!--delete from point -->
+	<delete id="deletePoint" parameterType="int">
+		DELETE FROM alaska_points
+	    WHERE local_name IN (#{local_name})
+	</delete>
+	
 	<!--delete from line -->
+	<delete id="deleteLine" parameterType="int">
+		DELETE FROM alaska_lines
+		WHERE local_name IN (#{local_name})
+	</delete>
 
 	<select id="detailLayer" parameterType="int"
 		resultType="com.alaska.test.dto.TestDto">
@@ -48,9 +121,40 @@
 	</select>
 
 	<!--raster layer detail -->
+	<select id="detailRaster" parameterType="int"
+		resultType="com.alaska.test.dto.RasterDto">
+		SELECT *
+		FROM alaska_raster
+		WHERE
+		local_name = #{local_name}
+	</select>
+	
 	<!--polygon layer detail -->
+	<select id="detailPolygon" parameterType="int"
+		resultType="com.alaska.test.dto.PolygonDto">
+		SELECT *
+		FROM alaska_polygons
+		WHERE
+		local_name = #{local_name}
+	</select>
+	
 	<!--point layer detail -->
+	<select id="detailPoint" parameterType="int"
+		resultType="com.alaska.test.dto.PointsDto">
+		SELECT *
+		FROM alaska_points
+		WHERE
+		local_name = #{local_name}
+	</select>
+	
 	<!--line layer detail -->
+	<select id="detailLine" parameterType="int"
+		resultType="com.alaska.test.dto.LineDto">
+		SELECT *
+		FROM alaska_lines
+		WHERE
+		local_name = #{local_name}
+	</select>
 
 	<update id="updateLayer"
 		parameterType="com.alaska.test.dto.TestDto">
@@ -58,12 +162,82 @@
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}
-		WHERE layer_num = #{layer_num}
+		WHERE local_name = #{local_name}
 	</update>
 
 	<!--update raster -->
+	<update id="updateRaster"
+		parameterType="com.alaska.test.dto.RasterDto">
+		UPDATE alaska_layers
+		SET
+		local_name = #{local_name},
+		data_name = #{data_name}
+		WHERE local_name = #{local_name}
+	</update>
+	
 	<!--update polygon -->
+	<update id="updatePolygon"
+		parameterType="com.alaska.test.dto.PolygonDto">
+		UPDATE alaska_polygons
+		SET
+		local_name = #{local_name},
+		data_name = #{data_name}
+		WHERE local_name = #{local_name}
+	</update>
+	
 	<!--update point -->
+	<update id="updatePointr"
+		parameterType="com.alaska.test.dto.PointDto">
+		UPDATE alaska_points
+		SET
+		local_name = #{local_name},
+		data_name = #{data_name}
+		WHERE local_name = #{local_name}
+	</update>
+	
 	<!--update line -->
+	<update id="updateLine"
+		parameterType="com.alaska.test.dto.LineDto">
+		UPDATE alaska_lines
+		SET
+		local_name = #{local_name},
+		data_name = #{data_name}
+		WHERE local_name = #{local_name}
+	</update>
+	
+	<!--update polygon style-->
+	<update id="updatePolygonStyle"
+		parameterType="com.alaska.test.dto.PolygonDto">
+		UPDATE alaska_polygons
+		SET
+		line_color = #{line_color},
+		line_width = #{line_width},
+		fill_color = #{fill_color},
+		opacity = #{opacity}
+		WHERE local_name = #{local_name}
+	</update>
+	
+	<!--update point style-->
+	<update id="updatePointStyle"
+		parameterType="com.alaska.test.dto.PointDto">
+		UPDATE alaska_points
+		SET
+		point_shape = #{line_color},
+		fill_color = #{fill_color},
+		point_radius = #{point_radius},
+		opacity = #{opacity}
+		WHERE local_name = #{local_name}
+	</update>
+	
+	<!--update line style-->
+	<update id="updateLineStyle"
+		parameterType="com.alaska.test.dto.LineDto">
+		UPDATE alaska_lines
+		SET
+		line_color = #{line_color},
+		line_width = #{line_width},
+		opacity = #{opacity}
+		WHERE local_name = #{local_name}
+	</update>
 
 </mapper>

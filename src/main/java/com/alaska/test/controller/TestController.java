@@ -1,7 +1,5 @@
 package com.alaska.test.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alaska.test.dto.TestDto;
 import com.alaska.test.service.TestService;
@@ -26,6 +23,7 @@ public class TestController {
 	public String index(Model model) throws Exception {
 
 		// raster
+		model.addAttribute("raster", testService.getRaster());
 
 		// polygon
 
@@ -34,6 +32,7 @@ public class TestController {
 		// line
 
 		model.addAttribute("list", testService.getAll());
+		
 		return "index";
 	}
 
@@ -80,6 +79,12 @@ public class TestController {
 	// update point layer
 
 	// update line layer
+
+	// update polygon style
+
+	// update point style
+
+	// update line style
 
 	// delete
 	@RequestMapping("/delete/{layer_num}")
