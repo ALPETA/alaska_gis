@@ -22,6 +22,42 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+	
+	//raster list
+	$.ajax({
+		method:"POST",
+		url:"/list/raster",
+		success:function(data){
+			console.log(data[0].local_name);
+			for(var i = 0; i < data.length; i++) {
+				$(".leftCol").append(`<li>
+						<input value="${data[i].data_name}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label text="${data[i].local_name}"></label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updateLayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data.local_name}+','+${data.data_name}">
+										레이어 수정</button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data.local_name}">
+										레이어 삭제</button>
+										
+									<!--style 변경-->	
+									<button id="changeStyle" class="btn btn-success btn-sm">
+										<i class="fa fa-gear"></i>
+									</button>
+									
+								</span>
+							</li>`)
+				
+			}
+		}
+	})
 
 });
 

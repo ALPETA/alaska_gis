@@ -78,7 +78,7 @@ $(document).ready(function() {
 
 });
 
-//레이어 생성 function
+//레이어 생성 function wfs
 function newVectorLayer(layerName, geoServerLayer) {
 	return new ol.layer.Vector({
 		layerName: layerName,
@@ -99,6 +99,9 @@ function newVectorLayer(layerName, geoServerLayer) {
 		visible: false,
 	})
 }
+
+//레이어 생성 function wms
+
 
 //Tile Layer
 var raster = new ol.layer.Tile({

@@ -1,12 +1,19 @@
 package com.alaska.test.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alaska.test.dto.LineDto;
 import com.alaska.test.dto.PointDto;
@@ -21,30 +28,26 @@ public class TestController {
 
 	@Autowired
 	private TestService testService;
+	
+	//main page
+	@GetMapping("/")
+    public String index() {
+            return "index";
+    }
 
-	// list
-	@RequestMapping("/")
-	public String index(Model model) throws Exception {
-
-		// raster
-		model.addAttribute("raster", testService.getRaster());
-
-		// polygon
-		model.addAttribute("polygon", testService.getPolygon());
-
-		// point
-		model.addAttribute("point", testService.getPoint());
-
-		// line
-		model.addAttribute("line", testService.getLine());
+	
+	
+	
+	// raster layer list
+	@PostMapping("/list/raster")
+	@ResponseBody
+	public List<RasterDto> rasterlist() throws Exception {
 
 		//model.addAttribute("list", testService.getAll());
 		
-		return "index";
+		return testService.getRaster();
 	}
 
-	
-	
 	
 	// insert
 	@RequestMapping("/insert")
