@@ -112,11 +112,6 @@ public class TestService{
 	
 	
 
-	// update
-	public int updateLayer(TestDto testDto) throws Exception {
-
-		return testMapper.updateLayer(testDto);
-	}
 
 	// update raster layer name
 	public int updateRaster(RasterDto rasterDto) throws Exception {

@@ -1,0 +1,84 @@
+CREATE TABLE public.alaska_lines (
+	layer_num serial NOT NULL DEFAULT nextval('alaska_lines_layer_num_seq'::regclass),
+	local_name varchar(50) NOT NULL,
+	data_name varchar(50) NOT NULL,
+	line_color varchar(50) NOT NULL DEFAULT '#000000'::bpchar,
+	line_width int4 NOT NULL DEFAULT 1,
+	opacity int4 NOT NULL DEFAULT 1,
+	layer_type varchar(50) NOT NULL DEFAULT 'line'::bpchar,
+	CONSTRAINT alaska_lines_pkey PRIMARY KEY (layer_num)
+);
+
+
+CREATE TABLE public.alaska_points (
+	layer_num serial NOT NULL DEFAULT nextval('alaska_points_layer_num_seq'::regclass),
+	local_name varchar(50) NOT NULL,
+	data_name varchar(50) NOT NULL,
+	point_shape varchar(50) NOT NULL DEFAULT 'circle'::bpchar,
+	fill_color varchar(50) NULL,
+	point_radius int4 NOT NULL DEFAULT 15,
+	opacity int4 NOT NULL DEFAULT 1,
+	layer_type varchar(50) NOT NULL DEFAULT 'point'::bpchar,
+	CONSTRAINT alaska_points_pkey PRIMARY KEY (layer_num)
+);
+
+
+CREATE TABLE public.alaska_polygons (
+	layer_num serial NOT NULL DEFAULT nextval('alaska_polygons_layer_num_seq'::regclass),
+	local_name varchar(50) NOT NULL,
+	data_name varchar(50) NOT NULL,
+	line_color varchar(50) NOT NULL DEFAULT '#000000'::bpchar,
+	line_width int4 NOT NULL DEFAULT 1,
+	fill_color varchar(50) NULL,
+	opacity int4 NOT NULL DEFAULT 1,
+	layer_type varchar(50) NOT NULL DEFAULT 'polygon'::bpchar,
+	CONSTRAINT alaska_polygons_pkey PRIMARY KEY (layer_num)
+);
+
+CREATE TABLE public.alaska_raster (
+	layer_num serial NOT NULL DEFAULT nextval('alaska_raster_layer_num_seq'::regclass),
+	local_name varchar(50) NOT NULL,
+	data_name varchar(50) NOT NULL,
+	layer_type varchar(50) NOT NULL DEFAULT 'raster'::bpchar,
+	CONSTRAINT alaska_raster_pkey PRIMARY KEY (layer_num)
+);
+
+
+insert into alaska_raster (local_name, data_name)
+values
+('akveg','test:akveg'),
+('elevation','test:elevation'),
+('forestclasses','test:forestclasses'),
+('landcover','test:landcover'),
+('prec_jan','test:prec_jan'),
+('prec_jul','test:prec_jul'),
+('srad_jan','test:srad_jan'),
+('srad_jul','test:srad_jul'),
+('temp_jan','test:temp_jan'),
+('temp_jul','test:temp_jul')
+
+insert into alaska_polygons (local_name, data_name, fill_color)
+values
+('Alaska_Division','test:Alaska_Division','#00ffff'),
+('Boundary','test:Boundary','#00ff9d'),
+('Common_Resource_Area','test:Common_Resource_Area','#a10ef0'),
+('Major_Lakes','test:Major_Lakes','#1d2dde'),
+('Major_Land_Resource_Area','test:Major_Land_Resource_Area','#b39200'),
+('permafrost_polygon','test:permafrost_polygon','#107a00')
+
+insert into alaska_points (local_name, data_name, fill_color)
+values
+('Airports','test:Airports','#ff0000'),
+('Major_Cities','test:Major_Cities','#ffd900'),
+('ne_10m_populated_places','test:ne_10m_populated_places','#260042'),
+('og_surface','test:og_surface','#ff00d9')
+
+insert into alaska_lines (local_name, data_name, line_color)
+values
+('DNRLandRecords_Pipeline','test:DNRLandRecords_Pipeline','#000000'),
+('Electrical_Lines','test:Electrical_Lines','#63562c'),
+('FourLane_Road','test:FourLane_Road','#6db000'),
+('Major_Rivers','test:Major_Rivers','#00379e'),
+('SingleLane_Road','test:SingleLane_Road','#d373ff'),
+('TwoLane_Road','test:TwoLane_Road','#520475'),
+('og_welltracks','test:og_welltracks','#ff9ef0')

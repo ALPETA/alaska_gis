@@ -28,40 +28,56 @@ public class TestController {
 
 	@Autowired
 	private TestService testService;
-	
-	//main page
-	@GetMapping("/")
-    public String index() {
-            return "index";
-    }
 
-	
-	
-	
+	// main page
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
+
 	// raster layer list
-	@PostMapping("/list/raster")
+	@RequestMapping("/list/raster")
 	@ResponseBody
 	public List<RasterDto> rasterlist() throws Exception {
 
-		//model.addAttribute("list", testService.getAll());
-		
+		// model.addAttribute("list", testService.getAll());
+
 		return testService.getRaster();
 	}
 
-	
-	// insert
-	@RequestMapping("/insert")
-	private String boardInsertProc(HttpServletRequest request) throws Exception {
+	// polygon layer list
+	@RequestMapping("/list/polygon")
+	@ResponseBody
+	public List<PolygonDto> polygonlist() throws Exception {
 
-		TestDto testDto = new TestDto();
+		// model.addAttribute("list", testService.getAll());
 
-		testDto.setLocal_name(request.getParameter("local_name"));
-		testDto.setData_name(request.getParameter("data_name"));
-
-		testService.insertLayer(testDto);
-
-		return "redirect:/";
+		return testService.getPolygon();
 	}
+
+	// point layer list
+	@RequestMapping("/list/point")
+	@ResponseBody
+	public List<PointDto> pointlist() throws Exception {
+
+		// model.addAttribute("list", testService.getAll());
+
+		return testService.getPoint();
+	}
+
+	// line layer list
+	@RequestMapping("/list/line")
+	@ResponseBody
+	public List<LineDto> linelist() throws Exception {
+
+		// model.addAttribute("list", testService.getAll());
+
+		return testService.getLine();
+	}
+
+	
+	
+	
 
 	// insert into raster
 	@RequestMapping("/insert/raster")
@@ -69,8 +85,8 @@ public class TestController {
 
 		RasterDto rasterDto = new RasterDto();
 
-		rasterDto.setLocal_name(request.getParameter("local_name"));
-		rasterDto.setData_name(request.getParameter("data_name"));
+		rasterDto.setLocal_name(request.getParameter("insert_local_name"));
+		rasterDto.setData_name(request.getParameter("insert_data_name"));
 
 		testService.insertRaster(rasterDto);
 
@@ -83,9 +99,9 @@ public class TestController {
 
 		PolygonDto polygonDto = new PolygonDto();
 
-		polygonDto.setLocal_name(request.getParameter("local_name"));
-		polygonDto.setData_name(request.getParameter("data_name"));
-		polygonDto.setFill_color(request.getParameter("fill_color"));
+		polygonDto.setLocal_name(request.getParameter("insert_local_name"));
+		polygonDto.setData_name(request.getParameter("insert_data_name"));
+		polygonDto.setFill_color(request.getParameter("insert_fill_color"));
 
 		testService.insertPolygon(polygonDto);
 
@@ -98,43 +114,26 @@ public class TestController {
 
 		PointDto pointDto = new PointDto();
 
-		pointDto.setLocal_name(request.getParameter("local_name"));
-		pointDto.setData_name(request.getParameter("data_name"));
-		pointDto.setFill_color(request.getParameter("fill_color"));
+		pointDto.setLocal_name(request.getParameter("insert_local_name"));
+		pointDto.setData_name(request.getParameter("insert_data_name"));
+		pointDto.setFill_color(request.getParameter("insert_fill_color"));
 
 		testService.insertPoint(pointDto);
 
 		return "redirect:/";
 	}
 
-	// insert into line 
+	// insert into line
 	@RequestMapping("/insert/line")
 	private String boardInsertLine(HttpServletRequest request) throws Exception {
 
 		LineDto lineDto = new LineDto();
 
-		lineDto.setLocal_name(request.getParameter("local_name"));
-		lineDto.setData_name(request.getParameter("data_name"));
-		lineDto.setLine_color(request.getParameter("line_color"));
+		lineDto.setLocal_name(request.getParameter("insert_local_name"));
+		lineDto.setData_name(request.getParameter("insert_data_name"));
+		lineDto.setLine_color(request.getParameter("insert_fill_color"));
 
 		testService.insertLine(lineDto);
-
-		return "redirect:/";
-	}
-
-	
-	
-	
-	// update
-	@RequestMapping("/updateProc")
-	private String boardUpdateProc(HttpServletRequest request) throws Exception {
-
-		TestDto testDto = new TestDto();
-		testDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
-		testDto.setLocal_name(request.getParameter("update_local_name"));
-		testDto.setData_name(request.getParameter("update_data_name"));
-
-		testService.updateLayer(testDto);
 
 		return "redirect:/";
 	}
@@ -145,9 +144,9 @@ public class TestController {
 
 		RasterDto rasterDto = new RasterDto();
 
-		rasterDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
-		rasterDto.setLocal_name(request.getParameter("local_name"));
-		rasterDto.setData_name(request.getParameter("data_name"));
+		rasterDto.setLayer_num(Integer.parseInt(request.getParameter("insert_local_name")));
+		rasterDto.setLocal_name(request.getParameter("update_local_name"));
+		rasterDto.setData_name(request.getParameter("update_data_name"));
 
 		testService.updateRaster(rasterDto);
 
@@ -161,8 +160,8 @@ public class TestController {
 		PolygonDto polygonDto = new PolygonDto();
 
 		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
-		polygonDto.setLocal_name(request.getParameter("local_name"));
-		polygonDto.setData_name(request.getParameter("data_name"));
+		polygonDto.setLocal_name(request.getParameter("update_local_name"));
+		polygonDto.setData_name(request.getParameter("update_data_name"));
 
 		testService.updatePolygon(polygonDto);
 
@@ -176,8 +175,8 @@ public class TestController {
 		PointDto pointDto = new PointDto();
 
 		pointDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
-		pointDto.setLocal_name(request.getParameter("local_name"));
-		pointDto.setData_name(request.getParameter("data_name"));
+		pointDto.setLocal_name(request.getParameter("update_local_name"));
+		pointDto.setData_name(request.getParameter("update_data_name"));
 
 		testService.updatePoint(pointDto);
 
@@ -191,16 +190,13 @@ public class TestController {
 		LineDto lineDto = new LineDto();
 
 		lineDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
-		lineDto.setLocal_name(request.getParameter("local_name"));
-		lineDto.setData_name(request.getParameter("data_name"));
+		lineDto.setLocal_name(request.getParameter("update_local_name"));
+		lineDto.setData_name(request.getParameter("update_data_name"));
 
 		testService.updateLine(lineDto);
 
 		return "redirect:/";
 	}
-	
-	
-	
 
 	// update polygon layer style
 	@RequestMapping("/update/polygon/style")
@@ -232,7 +228,7 @@ public class TestController {
 		pointDto.setFill_color(request.getParameter("fill_color"));
 		pointDto.setPoint_radius(Integer.parseInt(request.getParameter("point_radius")));
 		pointDto.setOpacity(Integer.parseInt(request.getParameter("opacity")));
-		
+
 		testService.updatePointStyle(pointDto);
 
 		return "redirect:/";
@@ -255,9 +251,6 @@ public class TestController {
 		return "redirect:/";
 	}
 
-	
-	
-	
 	// delete
 	@RequestMapping("/delete/{layer_num}")
 	private String boardDelete(@PathVariable int layer_num) throws Exception {
@@ -268,7 +261,7 @@ public class TestController {
 	}
 
 	// delete from raster layer
-	@RequestMapping("/delete/raster/{local_name}")
+	@RequestMapping("/delete/raster/{layer_num}")
 	private String boardDeleteRaster(@PathVariable int layer_num) throws Exception {
 
 		testService.deleteRaster(layer_num);
@@ -277,7 +270,7 @@ public class TestController {
 	}
 
 	// delete from polygon layer
-	@RequestMapping("/delete/polygon/{local_name}")
+	@RequestMapping("/delete/polygon/{layer_num}")
 	private String boardDeletePolygon(@PathVariable int layer_num) throws Exception {
 
 		testService.deletePolygon(layer_num);
@@ -286,7 +279,7 @@ public class TestController {
 	}
 
 	// delete from point layer
-	@RequestMapping("/delete/point/{local_name}")
+	@RequestMapping("/delete/point/{layer_num}")
 	private String boardDeletePoint(@PathVariable int layer_num) throws Exception {
 
 		testService.deletePoint(layer_num);
@@ -295,7 +288,7 @@ public class TestController {
 	}
 
 	// delete from line layer
-	@RequestMapping("/delete/line/{local_name}")
+	@RequestMapping("/delete/line/{layer_num}")
 	private String boardDeleteLine(@PathVariable int layer_num) throws Exception {
 
 		testService.deleteLine(layer_num);

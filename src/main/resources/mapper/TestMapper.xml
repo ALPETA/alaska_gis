@@ -168,7 +168,7 @@
 	<!--update raster -->
 	<update id="updateRaster"
 		parameterType="com.alaska.test.dto.RasterDto">
-		UPDATE alaska_layers
+		UPDATE alaska_raster
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}

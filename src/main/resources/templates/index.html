@@ -89,6 +89,7 @@
 	<!-- /#wrapper -->
 
 	<!-- 레이어 수정 modal -->
+	<form name="updateForm" id="updateForm" action="">
 	<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -98,8 +99,7 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
 				</div>
-				<form action="/updateProc" th:onsubmit="return validateupdateForm()"
-					name="updateForm">
+				
 					<div class="modal-body">
 						<div class="form-group">
 							<label>local name</label> <input class="form-control"
@@ -113,18 +113,19 @@
 						</div>
 						<input type="hidden" name="update_layer_num" id="update_layer_num"
 							value="">
+						<input type="hidden" name="update_layer_type" id="update_layer_type"
+							value="">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary" id="modalsubmit">레이어
-							수정</button>
+						<button type="button" class="btn btn-primary" onclick="validateupdateForm()">레이어 수정</button>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
-
+</form>
 	<!-- 레이어 추가 modal -->
+	<form name="insertForm" id="insertForm">
 	<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -135,28 +136,46 @@
 					<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
 				</div>
 				<div class="form">
-					<form action="insert" th:onsubmit="return validateinsertForm()"
-						name="insertForm">
+					
 						<div class="modal-body">
 							<div class="form-group">
+							<label class="radio-inline">
+								<input type="radio" name="insert_layer_type" value="raster" checked>
+								Raster
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="insert_layer_type" value="polygon" >
+								Polygon
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="insert_layer_type" value="point" >
+								Point
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="insert_layer_type" value="line" >
+								Line
+							</label>
+						</div>
+							<div class="form-group">
 								<label>local name</label> <input class="form-control"
-									placeholder="local name" id="local_name" name="local_name">
+									placeholder="local name" id="insert_local_name" name="insert_local_name">
 							</div>
 							<div class="form-group">
 								<label>data name</label> <input class="form-control"
-									placeholder="data name" id="data_name" name="data_name">
+									placeholder="data name" id="insert_data_name" name="insert_data_name">
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary">레이어 추가</button>
+							<button type="button" class="btn btn-primary" name="insertsubmit">레이어 추가</button>
 						</div>
-					</form>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 	<script th:src="@{~/jquery/js/jquery-1.12.4.js}"></script>
 	<script th:src="@{~/jquery/js/jquery-ui.js}"></script>
 	<!-- jQuery -->
@@ -168,7 +187,6 @@
 	<!-- Morris Charts JavaScript -->
 	<script th:src="@{~/bootstrap/vendor/raphael/raphael.min.js}"></script>
 	<script th:src="@{~/bootstrap/vendor/morrisjs/morris.min.js}"></script>
-	<script th:src="@{~/bootstrap/vendor/data/morris-data.js}"></script>
 	<!-- Custom Theme JavaScript -->
 	<script th:src="@{~/bootstrap/dist/js/sb-admin-2.js}"></script>
 

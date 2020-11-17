@@ -66,9 +66,6 @@ public interface TestMapper {
 	
 	
 	
-	// update
-	public int updateLayer(TestDto testDto) throws Exception;
-	
 	//update raster layer name
 	public int updateRaster(RasterDto rasterDto) throws Exception;
 	
