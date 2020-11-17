@@ -191,10 +191,10 @@ function validateupdateForm() {
 		else if (z == "line") {
 			$("#updateForm").attr("action", "/update/line/name")
 		}
-		
+
 		frm.submit();
 		alert("레이어가 수정되었습니다.");
-		
+
 	}
 }
 
@@ -233,27 +233,17 @@ $(document).on("click", "#deleteLayer", function() {
 
 
 
-/*
-//insert data
-var insertsubmit = document.forms["insertForm"]["insertsubmit"];
-	var intype = "dd";
-$(document).on("click", insertsubmit, function() {
-	var radios = $("#insert_layer_type");
 
-	for (var i = 0; i < radios.length; i++) {
-		if (radios[i].checked == true) {
-			intype = radios[i].value;
-		}
-	}
-
-	$("#insertForm").attr("action", "/insert/" + intype).submit(validateinsertForm());
-})
 
 //layer insert validation
 function validateinsertForm() {
-	var x = document.forms["insertForm"]["local_name"].value;
-	var y = document.forms["insertForm"]["data_name"].value;
+	var ifrm = $("#insertForm");
+	var x = document.forms["insertForm"]["insert_local_name"].value;
+	var y = document.forms["insertForm"]["insert_data_name"].value;
 
+	var radios = $('input[name="insert_layer_type"]:checked').val();
+
+	console.log(radios);
 	if (x == "") {
 		alert("local_name을 입력해 주세요");
 		return false;
@@ -262,8 +252,11 @@ function validateinsertForm() {
 		alert("data_name을 입력해 주세요");
 		return false;
 	} else {
+
+		$("#insertForm").attr("action", "/insert/" + radios);
 		alert("레이어가 추가되었습니다.");
+		ifrm.submit();
 	}
 }
-*/
+
 

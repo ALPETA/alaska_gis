@@ -9,8 +9,7 @@
 <meta name="author" content="">
 <title>ALASKA_GIS</title>
 
-<link th:href="@{~/jquery/css/jquery-ui.css}"
-	rel="stylesheet">
+<link th:href="@{~/jquery/css/jquery-ui.css}" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link th:href="@{~/bootstrap/vendor/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet">
@@ -76,11 +75,10 @@
 			</div>
 			<!-- /.navbar-static-side -->
 		</nav>
-		
+
 		<div id="page-wrapper">
-		<!-- map -->
-			<div id="map" class="map">
-			</div>
+			<!-- map -->
+			<div id="map" class="map"></div>
 
 		</div>
 		<!-- /#page-wrapper -->
@@ -90,16 +88,16 @@
 
 	<!-- 레이어 수정 modal -->
 	<form name="updateForm" id="updateForm" action="">
-	<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
-				</div>
-				
+		<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
+					</div>
+
 					<div class="modal-body">
 						<div class="form-group">
 							<label>local name</label> <input class="form-control"
@@ -112,69 +110,60 @@
 								name="update_data_name" type="text">
 						</div>
 						<input type="hidden" name="update_layer_num" id="update_layer_num"
-							value="">
-						<input type="hidden" name="update_layer_type" id="update_layer_type"
-							value="">
+							value=""> <input type="hidden" name="update_layer_type"
+							id="update_layer_type" value="">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary" onclick="validateupdateForm()">레이어 수정</button>
+						<button type="button" class="btn btn-primary"
+							onclick="validateupdateForm()">레이어 수정</button>
 					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
 	<!-- 레이어 추가 modal -->
 	<form name="insertForm" id="insertForm">
-	<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
-				</div>
-				<div class="form">
-					
-						<div class="modal-body">
-							<div class="form-group">
-							<label class="radio-inline">
-								<input type="radio" name="insert_layer_type" value="raster" checked>
-								Raster
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="insert_layer_type" value="polygon" >
-								Polygon
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="insert_layer_type" value="point" >
-								Point
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="insert_layer_type" value="line" >
-								Line
+		<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="raster" checked> Raster
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="polygon"> Polygon
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="point"> Point
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="line"> Line
 							</label>
 						</div>
-							<div class="form-group">
-								<label>local name</label> <input class="form-control"
-									placeholder="local name" id="insert_local_name" name="insert_local_name">
-							</div>
-							<div class="form-group">
-								<label>data name</label> <input class="form-control"
-									placeholder="data name" id="insert_data_name" name="insert_data_name">
-							</div>
+						<div class="form-group">
+							<label>local name</label> <input class="form-control"
+								placeholder="local name" id="insert_local_name"
+								name="insert_local_name">
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary" name="insertsubmit">레이어 추가</button>
+						<div class="form-group">
+							<label>data name</label> <input class="form-control"
+								placeholder="data name" id="insert_data_name"
+								name="insert_data_name">
 						</div>
-					
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary"
+							onclick="validateinsertForm()">레이어 추가</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	<script th:src="@{~/jquery/js/jquery-1.12.4.js}"></script>
 	<script th:src="@{~/jquery/js/jquery-ui.js}"></script>
