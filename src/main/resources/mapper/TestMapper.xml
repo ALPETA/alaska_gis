@@ -91,25 +91,25 @@
 	<!--delete from raster -->
 	<delete id="deleteRaster" parameterType="int">
 		DELETE FROM alaska_raster
-		WHERE local_name IN (#{local_name})
+		WHERE layer_num IN (#{layer_num})
 	</delete>
 	
 	<!--delete from polygon -->
 	<delete id="deletePolygon" parameterType="int">
 		DELETE FROM alaska_polygons
-		WHERE local_name IN (#{local_name})
+		WHERE layer_num IN (#{layer_num})
 	</delete>
 	
 	<!--delete from point -->
 	<delete id="deletePoint" parameterType="int">
 		DELETE FROM alaska_points
-	    WHERE local_name IN (#{local_name})
+	    WHERE layer_num IN (#{layer_num})
 	</delete>
 	
 	<!--delete from line -->
 	<delete id="deleteLine" parameterType="int">
 		DELETE FROM alaska_lines
-		WHERE local_name IN (#{local_name})
+		WHERE layer_num IN (#{layer_num})
 	</delete>
 
 	<select id="detailLayer" parameterType="int"
@@ -126,7 +126,7 @@
 		SELECT *
 		FROM alaska_raster
 		WHERE
-		local_name = #{local_name}
+		layer_num = #{layer_num}
 	</select>
 	
 	<!--polygon layer detail -->
@@ -135,7 +135,7 @@
 		SELECT *
 		FROM alaska_polygons
 		WHERE
-		local_name = #{local_name}
+		layer_num = #{layer_num}
 	</select>
 	
 	<!--point layer detail -->
@@ -144,7 +144,7 @@
 		SELECT *
 		FROM alaska_points
 		WHERE
-		local_name = #{local_name}
+		layer_num = #{layer_num}
 	</select>
 	
 	<!--line layer detail -->
@@ -153,7 +153,7 @@
 		SELECT *
 		FROM alaska_lines
 		WHERE
-		local_name = #{local_name}
+		layer_num = #{layer_num}
 	</select>
 
 	<update id="updateLayer"
@@ -172,7 +172,7 @@
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update polygon -->
@@ -182,7 +182,7 @@
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update point -->
@@ -192,7 +192,7 @@
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update line -->
@@ -202,7 +202,7 @@
 		SET
 		local_name = #{local_name},
 		data_name = #{data_name}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update polygon style-->
@@ -214,7 +214,7 @@
 		line_width = #{line_width},
 		fill_color = #{fill_color},
 		opacity = #{opacity}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update point style-->
@@ -226,7 +226,7 @@
 		fill_color = #{fill_color},
 		point_radius = #{point_radius},
 		opacity = #{opacity}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 	
 	<!--update line style-->
@@ -237,7 +237,7 @@
 		line_color = #{line_color},
 		line_width = #{line_width},
 		opacity = #{opacity}
-		WHERE local_name = #{local_name}
+		WHERE layer_num = #{layer_num}
 	</update>
 
 </mapper>

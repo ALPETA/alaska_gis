@@ -52,16 +52,16 @@ public interface TestMapper {
 	public TestDto detailLayer(int layer_num) throws Exception;
 	
 	//raster layer detail
-	public TestDto detailRaster(String local_name) throws Exception;
+	public TestDto detailRaster(int layer_num) throws Exception;
 	
 	//polygon layer detail
-	public TestDto detailPolygon(String local_name) throws Exception;
+	public TestDto detailPolygon(int layer_num) throws Exception;
 	
 	//point layer detail
-	public TestDto detailPoint(String local_name) throws Exception;
+	public TestDto detailPoint(int layer_num) throws Exception;
 	
 	//line layer detail
-	public TestDto detailLine(String local_name) throws Exception;
+	public TestDto detailLine(int layer_num) throws Exception;
 
 	
 	
@@ -100,16 +100,16 @@ public interface TestMapper {
 	public int deleteLayer(int layer_num) throws Exception;
 	
 	//delete from raster layer
-	public int deleteRaster(String local_name) throws Exception;
+	public int deleteRaster(int layer_num) throws Exception;
 	
 	//delete from polygon layer
-	public int deletePolygon(String local_name) throws Exception;
+	public int deletePolygon(int layer_num) throws Exception;
 	
 	//delete from point layer
-	public int deletePoint(String local_name) throws Exception;
+	public int deletePoint(int layer_num) throws Exception;
 	
 	//delete from line layer
-	public int deleteLine(String local_name) throws Exception;
+	public int deleteLine(int layer_num) throws Exception;
 	
 	
 

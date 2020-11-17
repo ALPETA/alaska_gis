@@ -145,6 +145,7 @@ public class TestController {
 
 		RasterDto rasterDto = new RasterDto();
 
+		rasterDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
 		rasterDto.setLocal_name(request.getParameter("local_name"));
 		rasterDto.setData_name(request.getParameter("data_name"));
 
@@ -159,6 +160,7 @@ public class TestController {
 
 		PolygonDto polygonDto = new PolygonDto();
 
+		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
 		polygonDto.setLocal_name(request.getParameter("local_name"));
 		polygonDto.setData_name(request.getParameter("data_name"));
 
@@ -173,6 +175,7 @@ public class TestController {
 
 		PointDto pointDto = new PointDto();
 
+		pointDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
 		pointDto.setLocal_name(request.getParameter("local_name"));
 		pointDto.setData_name(request.getParameter("data_name"));
 
@@ -187,6 +190,7 @@ public class TestController {
 
 		LineDto lineDto = new LineDto();
 
+		lineDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
 		lineDto.setLocal_name(request.getParameter("local_name"));
 		lineDto.setData_name(request.getParameter("data_name"));
 
@@ -204,6 +208,7 @@ public class TestController {
 
 		PolygonDto polygonDto = new PolygonDto();
 
+		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
 		polygonDto.setLocal_name(request.getParameter("local_name"));
 		polygonDto.setLine_color(request.getParameter("line_color"));
 		polygonDto.setLine_width(Integer.parseInt(request.getParameter("line_width")));
@@ -221,6 +226,7 @@ public class TestController {
 
 		PointDto pointDto = new PointDto();
 
+		pointDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
 		pointDto.setLocal_name(request.getParameter("local_name"));
 		pointDto.setPoint_shape(request.getParameter("point_shape"));
 		pointDto.setFill_color(request.getParameter("fill_color"));
@@ -238,6 +244,7 @@ public class TestController {
 
 		LineDto lineDto = new LineDto();
 
+		lineDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
 		lineDto.setLocal_name(request.getParameter("local_name"));
 		lineDto.setLine_color(request.getParameter("line_color"));
 		lineDto.setLine_width(Integer.parseInt(request.getParameter("line_width")));
@@ -262,36 +269,36 @@ public class TestController {
 
 	// delete from raster layer
 	@RequestMapping("/delete/raster/{local_name}")
-	private String boardDeleteRaster(@PathVariable String local_name) throws Exception {
+	private String boardDeleteRaster(@PathVariable int layer_num) throws Exception {
 
-		testService.deleteRaster(local_name);
+		testService.deleteRaster(layer_num);
 
 		return "redirect:/";
 	}
 
 	// delete from polygon layer
 	@RequestMapping("/delete/polygon/{local_name}")
-	private String boardDeletePolygon(@PathVariable String local_name) throws Exception {
+	private String boardDeletePolygon(@PathVariable int layer_num) throws Exception {
 
-		testService.deletePolygon(local_name);
+		testService.deletePolygon(layer_num);
 
 		return "redirect:/";
 	}
 
 	// delete from point layer
 	@RequestMapping("/delete/point/{local_name}")
-	private String boardDeletePoint(@PathVariable String local_name) throws Exception {
+	private String boardDeletePoint(@PathVariable int layer_num) throws Exception {
 
-		testService.deletePoint(local_name);
+		testService.deletePoint(layer_num);
 
 		return "redirect:/";
 	}
 
 	// delete from line layer
 	@RequestMapping("/delete/line/{local_name}")
-	private String boardDeleteLine(@PathVariable String local_name) throws Exception {
+	private String boardDeleteLine(@PathVariable int layer_num) throws Exception {
 
-		testService.deleteLine(local_name);
+		testService.deleteLine(layer_num);
 
 		return "redirect:/";
 	}

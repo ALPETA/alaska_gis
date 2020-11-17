@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PolygonDto {
+	private int layer_num;
 	private String local_name;
 	private String data_name;
 	private String line_color;

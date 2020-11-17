@@ -40,7 +40,7 @@ $(document).ready(function() {
 								
 									<button id="updateLayer" name="updatelayer"
 										class="btn btn-info btn-sm"
-										value="${data.local_name}+','+${data.data_name}">
+										value="${data.layer_num}+','+${data.local_name}+','+${data.data_name}">
 										레이어 수정</button>
 										
 									<button id="deleteLayer" name="deleteLayer"

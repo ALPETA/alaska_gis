@@ -86,27 +86,27 @@ public class TestService{
 	}
 
 	// raster layer detail
-	public TestDto detailRaster(String local_name) throws Exception {
+	public TestDto detailRaster(int layer_num) throws Exception {
 
-		return testMapper.detailRaster(local_name);
+		return testMapper.detailRaster(layer_num);
 	}
 
 	// polygon layer detail
-	public TestDto detailPolygon(String local_name) throws Exception {
+	public TestDto detailPolygon(int layer_num) throws Exception {
 
-		return testMapper.detailPolygon(local_name);
+		return testMapper.detailPolygon(layer_num);
 	}
 
 	// point layer detail
-	public TestDto detailPoint(String local_name) throws Exception {
+	public TestDto detailPoint(int layer_num) throws Exception {
 
-		return testMapper.detailPoint(local_name);
+		return testMapper.detailPoint(layer_num);
 	}
 
 	// line layer detail
-	public TestDto detailLine(String local_name) throws Exception {
+	public TestDto detailLine(int layer_num) throws Exception {
 
-		return testMapper.detailLine(local_name);
+		return testMapper.detailLine(layer_num);
 	}
 	
 	
@@ -173,27 +173,27 @@ public class TestService{
 	}
 
 	// delete from raster layer
-	public int deleteRaster(String local_name) throws Exception {
+	public int deleteRaster(int layer_num) throws Exception {
 
-		return testMapper.deleteRaster(local_name);
+		return testMapper.deleteRaster(layer_num);
 	}
 
 	// delete from polygon layer
-	public int deletePolygon(String local_name) throws Exception {
+	public int deletePolygon(int layer_num) throws Exception {
 
-		return testMapper.deletePolygon(local_name);
+		return testMapper.deletePolygon(layer_num);
 	}
 
 	// delete from point layer
-	public int deletePoint(String local_name) throws Exception {
+	public int deletePoint(int layer_num) throws Exception {
 
-		return testMapper.deletePoint(local_name);
+		return testMapper.deletePoint(layer_num);
 	}
 
 	// delete from line layer
-	public int deleteLine(String local_name) throws Exception {
+	public int deleteLine(int layer_num) throws Exception {
 
-		return testMapper.deleteLine(local_name);
+		return testMapper.deleteLine(layer_num);
 	}
 
 }
