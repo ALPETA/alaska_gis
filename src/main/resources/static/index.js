@@ -1,11 +1,12 @@
 $(document).ready(function() {
 });
-	//raster list
-	$.ajax({
-		url: "/list/raster",
-		success: function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
+//raster list
+$.ajax({
+	url: "/list/raster",
+	async:false,
+	success: function(data) {
+		for (var i = 0; i < data.length; i++) {
+			$(".leftCol").append(`<li>
 						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
@@ -25,51 +26,17 @@ $(document).ready(function() {
 								</span>
 							</li>`)
 
-			}
 		}
-	});
+	}
+});
 
-	//polygon list
-	$.ajax({
-		url: "/list/polygon",
-		success: function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
-						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
-								<label>${data[i].local_name}</label>
-								
-								<span class="input-group-btn">
-								
-									<button id="updatelayer" name="updatelayer"
-										class="btn btn-info btn-sm"
-										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										레이어 수정</button>
-										
-									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										레이어 삭제</button>
-									<input type="hidden" value="${data[i].layer_type}">
-										
-									<!--style 변경-->	
-									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-gear"></i>
-									</button>
-									
-								</span>
-							</li>`)
-
-			}
-		}
-	});
-
-	//point list
-	$.ajax({
-		url: "/list/point",
-		success: function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
+//polygon list
+$.ajax({
+	url: "/list/polygon",
+	async:false,
+	success: function(data) {
+		for (var i = 0; i < data.length; i++) {
+			$(".leftCol").append(`<li>
 						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
@@ -95,16 +62,53 @@ $(document).ready(function() {
 								</span>
 							</li>`)
 
-			}
 		}
-	});
+	}
+});
 
-	//line list
-	$.ajax({
-		url: "/list/line",
-		success: function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
+//point list
+$.ajax({
+	url: "/list/point",
+	async:false,
+	success: function(data) {
+		for (var i = 0; i < data.length; i++) {
+			$(".leftCol").append(`<li>
+						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label>${data[i].local_name}</label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updatelayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
+										레이어 수정</button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										레이어 삭제</button>
+									<input type="hidden" value="${data[i].layer_type}">
+										
+									<!--style 변경-->	
+									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										<i class="fa fa-gear"></i>
+									</button>
+									
+								</span>
+							</li>`)
+
+		}
+	}
+});
+
+//line list
+$.ajax({
+	url: "/list/line",
+	async:false,
+	success: function(data) {
+		for (var i = 0; i < data.length; i++) {
+			$(".leftCol").append(`<li>
 						<input value="${data[i].data_name},${data[i].data_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
@@ -130,9 +134,9 @@ $(document).ready(function() {
 								</span>
 							</li>`)
 
-			}
 		}
-	});
+	}
+});
 
 
 
