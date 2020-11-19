@@ -28,10 +28,13 @@ $(document).ready(function() {
 
 	//checkbox 체크 여부에 따른 setVisible 처리
 	$(".checkSelect").change(function() {
-
+		var datas = this.value;
+		datas = datas.split(',');
+		var data_name = datas[0];
+	
 		if ($(this).attr("class").split(" ")[1] == "active") {
 			for (var i = 1; i < send_array.length; i++) {
-				if (send_array[i].values_.layerName == $(this).val()) {
+				if (send_array[i].values_.layerName == data_name) {
 					send_array[i].setVisible(false)
 					$("#allCheckbox").prop("checked", false);
 					$("#allCheckbox").removeClass("active");
@@ -41,12 +44,10 @@ $(document).ready(function() {
 		}
 		else {
 			for (var i = 1; i < send_array.length; i++) {
-				if (send_array[i].values_.layerName == $(this).val()) {
-					console.log(send_array[i].values_.layerName);
+				if (send_array[i].values_.layerName == data_name) {
 					send_array[i].setVisible(true);
 				}
 			}
-			console.log(this.value);
 			$(this).addClass("active")
 		}
 

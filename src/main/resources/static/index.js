@@ -22,12 +22,6 @@ $(document).ready(function() {
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										레이어 삭제</button>
 									<input type="hidden" value="${data[i].layer_type}">
-										
-									<!--style 변경-->	
-									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-gear"></i>
-									</button>
-									
 								</span>
 							</li>`)
 
