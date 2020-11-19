@@ -61,9 +61,9 @@
 									data-toggle="modal" data-target="#insertmodal">레이어 추가</button>
 							</div> <!-- /input-group -->
 						</li>
-						<ul class="leftCol">
+						<ul class="leftCol" id="leftCol">
 							<h3>
-								<input type="checkbox" name="allCheckbox" id="allCheckbox"
+								<input type="checkbox" name="allCheckbox" id="allCheckbox" value="allcheck"
 									class="checkSelect"> Alaska
 							</h3>
 							<hr>
@@ -180,7 +180,7 @@
 	<script th:src="@{~/bootstrap/dist/js/sb-admin-2.js}"></script>
 
 	<script th:src="@{~/ol/js/ol.js}"></script>
-	<script th:src="@{~/gis/js/index.js}"></script>
+	<script th:src="@{~/index.js}"></script>
 	<script th:src="@{~/gis/js/layer.js}"></script>
 </body>
 </html>

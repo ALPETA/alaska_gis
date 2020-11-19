@@ -63,24 +63,24 @@
 	<insert id="insertPolygon"
 		parameterType="com.alaska.test.dto.PolygonDto">
 		INSERT INTO
-		alaska_Polygons (local_name, data_name, fill_color)
-		VALUES(#{local_name},#{data_name},#{fill_color})
+		alaska_Polygons (local_name, data_name)
+		VALUES(#{local_name},#{data_name})
 	</insert>
 	
 	<!--insert into point -->
 	<insert id="insertPoint"
 		parameterType="com.alaska.test.dto.PointDto">
 		INSERT INTO
-		alaska_Points (local_name, data_name, fill_color)
-		VALUES(#{local_name},#{data_name},#{fill_color})
+		alaska_Points (local_name, data_name)
+		VALUES(#{local_name},#{data_name})
 	</insert>
 	
 	<!--insert into line -->
 	<insert id="insertLine"
 		parameterType="com.alaska.test.dto.LineDto">
 		INSERT INTO
-		alaska_Lines (local_name, data_name, line_color)
-		VALUES(#{local_name},#{data_name},#{line_color})
+		alaska_Lines (local_name, data_name)
+		VALUES(#{local_name},#{data_name})
 	</insert>
 
 	<delete id="deleteLayer" parameterType="int">

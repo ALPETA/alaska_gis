@@ -1,12 +1,12 @@
 $(document).ready(function() {
-
+});
 	//raster list
 	$.ajax({
 		url: "/list/raster",
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				$(".leftCol").append(`<li>
-						<input value="${data[i].data_name}" type="checkbox"
+						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -41,7 +41,7 @@ $(document).ready(function() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				$(".leftCol").append(`<li>
-						<input value="${data[i].data_name}" type="checkbox"
+						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -76,7 +76,7 @@ $(document).ready(function() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				$(".leftCol").append(`<li>
-						<input value="${data[i].data_name}" type="checkbox"
+						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				$(".leftCol").append(`<li>
-						<input value="${data[i].data_name}" type="checkbox"
+						<input value="${data[i].data_name},${data[i].data_type}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -141,7 +141,7 @@ $(document).ready(function() {
 	});
 
 
-});
+
 
 
 

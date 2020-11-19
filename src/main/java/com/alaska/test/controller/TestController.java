@@ -101,7 +101,6 @@ public class TestController {
 
 		polygonDto.setLocal_name(request.getParameter("insert_local_name"));
 		polygonDto.setData_name(request.getParameter("insert_data_name"));
-		polygonDto.setFill_color(request.getParameter("insert_fill_color"));
 
 		testService.insertPolygon(polygonDto);
 
@@ -116,7 +115,6 @@ public class TestController {
 
 		pointDto.setLocal_name(request.getParameter("insert_local_name"));
 		pointDto.setData_name(request.getParameter("insert_data_name"));
-		pointDto.setFill_color(request.getParameter("insert_fill_color"));
 
 		testService.insertPoint(pointDto);
 
@@ -131,7 +129,6 @@ public class TestController {
 
 		lineDto.setLocal_name(request.getParameter("insert_local_name"));
 		lineDto.setData_name(request.getParameter("insert_data_name"));
-		lineDto.setLine_color(request.getParameter("insert_fill_color"));
 
 		testService.insertLine(lineDto);
 
@@ -144,7 +141,7 @@ public class TestController {
 
 		RasterDto rasterDto = new RasterDto();
 
-		rasterDto.setLayer_num(Integer.parseInt(request.getParameter("insert_local_name")));
+		rasterDto.setLayer_num(Integer.parseInt(request.getParameter("update_layer_num")));
 		rasterDto.setLocal_name(request.getParameter("update_local_name"));
 		rasterDto.setData_name(request.getParameter("update_data_name"));
 
