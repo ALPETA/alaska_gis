@@ -1,12 +1,13 @@
-//레이어 그룹
+//Layer Group
 var alaska_layer_group = new ol.layer.Group();
 
-//개별 레이어 Array
+//Layer Array
 var send_array = Array();
 
-$(document).ready(function() {
+//checkbox Array
+var checked_layer = $(".checkSelect");
 
-	var checked_layer = $(".checkSelect");
+$(document).ready(function() {
 
 	for (i = 1; i < checked_layer.length; i++) {
 		var layer_values = checked_layer[i].value;
@@ -14,11 +15,9 @@ $(document).ready(function() {
 
 		if (layer_values[1] == 'raster') {
 			send_array[i] = newTileLayer(layer_values[0], layer_values[0]);
-			console.log(layer_values[0]);
 		}
 		else {
 			send_array[i] = newVectorLayer(layer_values[0], layer_values[0]);
-			console.log(layer_values[0]);
 		}
 
 		//group에 넣기
@@ -26,70 +25,86 @@ $(document).ready(function() {
 	}
 
 
-	//checkbox 체크 여부에 따른 setVisible 처리
-	$(".checkSelect").change(function() {
-		var datas = this.value;
-		datas = datas.split(',');
-		var data_name = datas[0];
-	
-		if ($(this).attr("class").split(" ")[1] == "active") {
-			for (var i = 1; i < send_array.length; i++) {
-				if (send_array[i].values_.layerName == data_name) {
-					send_array[i].setVisible(false)
-					$("#allCheckbox").prop("checked", false);
-					$("#allCheckbox").removeClass("active");
+});
+
+//checkbox 체크 여부에 따른 setVisible 처리
+$(".checkSelect").change(function() {
+	var datas = this.value;
+	datas = datas.split(',');
+	var data_name = datas[0];
+
+	if ($(this).attr("class").split(" ")[1] == "active") {
+		for (var i = 1; i < send_array.length; i++) {
+			if (send_array[i].values_.layerName == data_name) {
+				send_array[i].setVisible(false)
+				$("#allCheckbox").prop("checked", false);
+				$("#allCheckbox").removeClass("active");
+			}
+		}
+		$(this).removeClass("active")
+	}
+	else {
+		for (var i = 1; i < send_array.length; i++) {
+			if (send_array[i].values_.layerName == data_name) {
+				send_array[i].setVisible(true);
+			}
+		}
+		$(this).addClass("active")
+	}
+
+});
+
+//레이어 전체 선택/해제 여부에 따른 setVisible 처리
+$("#allCheckbox").change(function() {
+	if ($("#allCheckbox").prop("checked")) {
+		$("input[type=checkbox]").prop("checked", true);
+
+		for (var i = 1; i < checked_layer.length; i++) {
+
+			var datas = checked_layer[i].value;
+			datas = datas.split(',');
+			var data_name = datas[0];
+
+			for (var r = 1; r < send_array.length; r++) {
+
+				if (send_array[r].values_.layerName == data_name) {
+
+					if ($(checked_layer[r]).attr("class").split(" ")[1] == "active") {
+						continue;
+					}
+					else {
+						send_array[r].setVisible(true)
+						$(checked_layer[r]).addClass("active")
+					}
 				}
 			}
-			$(this).removeClass("active")
-		}
-		else {
-			for (var i = 1; i < send_array.length; i++) {
-				if (send_array[i].values_.layerName == data_name) {
-					send_array[i].setVisible(true);
-				}
-			}
-			$(this).addClass("active")
-		}
 
-	});
+		}
+	}
 
-	//레이어 전체 선택/해제 여부에 따른 setVisible 처리
-	$("#allCheckbox").change(function() {
-		if ($("#allCheckbox").prop("checked")) {
-			$("input[type=checkbox]").prop("checked", true);
-			for (i = 1; i < checked_layer.length; i++) {
-				for (var i = 1; i < send_array.length; i++) {
-					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
-						if ($(checked_layer[i]).attr("class").split(" ")[1] == "active") {
-							continue;
-						}
-						else {
-							send_array[i].setVisible(true)
-							$(checked_layer[i]).addClass("active")
-						}
+	else {
+		$("input[type=checkbox]").prop("checked", false);
+		for (var i = 1; i < checked_layer.length; i++) {
+
+			var datas = checked_layer[i].value;
+			datas = datas.split(',');
+			var data_name = datas[0];
+
+			for (var r = 1; r < send_array.length; r++) {
+
+				if (send_array[r].values_.layerName == data_name) {
+
+					if ($(checked_layer[r]).attr("class").split(" ")[1] == "active") {
+						send_array[r].setVisible(false)
+						$(checked_layer[r]).removeClass("active")
+					}
+					else {
+						continue;
 					}
 				}
 			}
 		}
-
-		else {
-			$("input[type=checkbox]").prop("checked", false);
-			for (i = 1; i < checked_layer.length; i++) {
-				for (var i = 1; i < send_array.length; i++) {
-					if (send_array[i].values_.layerName == $(checked_layer[i]).val()) {
-						if ($(checked_layer[i]).attr("class").split(" ")[1] == "active") {
-							send_array[i].setVisible(false)
-							$(checked_layer[i]).removeClass("active")
-						}
-						else {
-							continue;
-						}
-					}
-				}
-			}
-		}
-	});
-
+	}
 });
 
 //레이어 생성 function wfs
