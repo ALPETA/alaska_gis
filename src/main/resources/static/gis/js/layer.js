@@ -143,6 +143,12 @@ function newTileLayer(layerName, geoServerLayer) {
 
 }
 
+var view = new ol.View({
+	center: new ol.proj.fromLonLat([-151, 60.68]),
+	maxZoom: 19,
+	zoom: 7,
+});
+
 
 //Tile Layer
 var base = new ol.layer.Tile({
@@ -157,12 +163,34 @@ var base = new ol.layer.Tile({
 var map = new ol.Map({
 	layers: [base, alaska_layer_group],
 	target: document.getElementById('map'),
-	view: new ol.View({
-		center: new ol.proj.fromLonLat([-151, 60.68]),
-		maxZoom: 19,
-		zoom: 7,
-	}),
+	view: view,
 });
 
 
 
+var popup = new ol.Overlay({
+	element: document.getElementById('popup'),
+});
+map.addOverlay(popup);
+
+var vienna = new ol.Overlay({
+	position: pos,
+	element: document.getElementById('vienna'),
+});
+map.addOverlay(vienna);
+
+var marker = new ol.Overlay({
+	position: pos,
+	positioning: 'center-center',
+	element: document.getElementById('marker'),
+	stopEvent: false,
+});
+map.addOverlay(marker);
+
+var pos = ol.proj.fromLonLat([-151, 60.68]);
+
+map.on('click', function(evt) {
+	map.forEachFeatureAtPixel(evt.pixel, function(ff) {
+		console.log(ff.getProperties());
+	})
+})

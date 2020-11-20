@@ -1,9 +1,12 @@
 $(document).ready(function() {
 });
+
+
+
 //raster list
 $.ajax({
 	url: "/list/raster",
-	async:false,
+	async: false,
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
@@ -33,7 +36,7 @@ $.ajax({
 //polygon list
 $.ajax({
 	url: "/list/polygon",
-	async:false,
+	async: false,
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
@@ -55,7 +58,7 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -69,7 +72,7 @@ $.ajax({
 //point list
 $.ajax({
 	url: "/list/point",
-	async:false,
+	async: false,
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
@@ -91,7 +94,7 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -105,7 +108,7 @@ $.ajax({
 //line list
 $.ajax({
 	url: "/list/line",
-	async:false,
+	async: false,
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
@@ -127,7 +130,7 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -139,9 +142,7 @@ $.ajax({
 });
 
 
-
-
-
+ 
 
 
 //update modal data
