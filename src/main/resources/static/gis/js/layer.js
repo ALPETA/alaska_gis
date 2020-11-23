@@ -13,12 +13,19 @@ $(document).ready(function() {
 	for (i = 1; i < checked_layer.length; i++) {
 		var layer_values = checked_layer[i].value;
 		layer_values = layer_values.split(',');
+		var layer_values_length = layer_values.length;
 
-		if (layer_values[1] == 'raster') {
-			send_array[i] = newTileLayer(layer_values[0], layer_values[0]);
+		if (layer_values[layer_values_length - 1] == 'raster') {
+			send_array[i] = newTileLayer(layer_values[1], layer_values[2]);
 		}
-		else {
-			send_array[i] = newVectorLayer(layer_values[0], layer_values[0]);
+		else if (layer_values[layer_values_length - 1] == 'polygon') {
+			send_array[i] = newVectorLayer_polygon(layer_values[1], layer_values[2], layer_values[3], layer_values[4], layer_values[5], layer_values[6]);
+		}
+		else if (layer_values[layer_values_length - 1] == 'point') {
+			send_array[i] = newVectorLayer_point(layer_values[1], layer_values[2], layer_values[3], layer_values[4], layer_values[5], layer_values[6]);
+		}
+		else if (layer_values[layer_values_length - 1] == 'line') {
+			send_array[i] = newVectorLayer_line(layer_values[1], layer_values[2], layer_values[3], layer_values[4], layer_values[5]);
 		}
 
 		//group에 넣기
@@ -32,7 +39,7 @@ $(document).ready(function() {
 $(".checkSelect").change(function() {
 	var datas = this.value;
 	datas = datas.split(',');
-	var data_name = datas[0];
+	var data_name = datas[1];
 
 	if ($(this).attr("class").split(" ")[1] == "active") {
 		for (var i = 1; i < send_array.length; i++) {
@@ -64,7 +71,7 @@ $("#allCheckbox").change(function() {
 
 			var datas = checked_layer[i].value;
 			datas = datas.split(',');
-			var data_name = datas[0];
+			var data_name = datas[1];
 
 			for (var r = 1; r < send_array.length; r++) {
 
@@ -89,7 +96,7 @@ $("#allCheckbox").change(function() {
 
 			var datas = checked_layer[i].value;
 			datas = datas.split(',');
-			var data_name = datas[0];
+			var data_name = datas[1];
 
 			for (var r = 1; r < send_array.length; r++) {
 
@@ -108,8 +115,19 @@ $("#allCheckbox").change(function() {
 	}
 });
 
-//레이어 생성 function wfs
-function newVectorLayer(layerName, geoServerLayer) {
+
+//레이어 생성 function wfs - polygon
+function newVectorLayer_polygon(layerName, geoServerLayer, line_color, line_width, fill_color, opacity) {
+	var style = new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: line_color,
+			width: parseInt(line_width),
+		}),
+		fill: new ol.style.Fill({
+			color: fill_color
+		}),
+	})
+
 	return new ol.layer.Vector({
 		layerName: layerName,
 		source: new ol.source.Vector({
@@ -126,6 +144,105 @@ function newVectorLayer(layerName, geoServerLayer) {
 			},
 			strategy: ol.loadingstrategy.bbox,
 		}),
+		style: style,
+		opacity: parseInt(opacity),
+		visible: false,
+	})
+}
+
+//레이어 생성 function wfs - point
+function newVectorLayer_point(layerName, geoServerLayer, point_shape, fill_color, point_radius, opacity) {
+	var style;
+
+	if (point_shape == 'circle') {
+		style = new ol.style.Style({
+			image: new ol.style.Circle({
+				fill: new ol.style.Fill({ color: fill_color }),
+				radius: parseInt(point_radius),
+			}),
+		});
+	}
+	else if (point_shape == 'square') {
+		style = new ol.style.Style({
+			image: new ol.style.RegularShape({
+				fill: new ol.style.Fill({ color: fill_color }),
+				points: 4,
+				radius: parseInt(point_radius),
+				angle: Math.PI / 4,
+			}),
+		});
+	}
+	else if (point_shape == 'triangle') {
+		style = new ol.style.Style({
+			image: new ol.style.RegularShape({
+				fill: new ol.style.Fill({ color: fill_color }),
+				points: 3,
+				radius: parseInt(point_radius),
+
+			}),
+		});
+	}
+	else if (point_shape == 'star') {
+		style = new ol.style.Style({
+			image: new ol.style.RegularShape({
+				fill: new ol.style.Fill({ color: fill_color }),
+				points: 5,
+				radius: parseInt(point_radius),
+				radius2: parseInt(point_radius / 2),
+			}),
+		});
+	}
+
+
+	return new ol.layer.Vector({
+		layerName: layerName,
+		source: new ol.source.Vector({
+			format: new ol.format.GeoJSON(),
+			url: function(extent) {
+				return (
+					'http://localhost:8088/geoserver/test/wfs?service=WFS&' +
+					'version=1.1.0&request=GetFeature&typename=' + geoServerLayer +
+					'&outputFormat=application/json&srsname=EPSG:3857&' +
+					'bbox=' +
+					extent.join(',') +
+					',EPSG:3857'
+				);
+			},
+			strategy: ol.loadingstrategy.bbox,
+		}),
+		style: style,
+		opacity: parseInt(opacity),
+		visible: false,
+	})
+}
+
+//레이어 생성 function wfs -line
+function newVectorLayer_line(layerName, geoServerLayer, line_color, line_width, opacity) {
+	var style = new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: line_color,
+			width: parseInt(line_width),
+		}),
+	})
+
+	return new ol.layer.Vector({
+		layerName: layerName,
+		source: new ol.source.Vector({
+			format: new ol.format.GeoJSON(),
+			url: function(extent) {
+				return (
+					'http://localhost:8088/geoserver/test/wfs?service=WFS&' +
+					'version=1.1.0&request=GetFeature&typename=' + geoServerLayer +
+					'&outputFormat=application/json&srsname=EPSG:3857&' +
+					'bbox=' +
+					extent.join(',') +
+					',EPSG:3857'
+				);
+			},
+			strategy: ol.loadingstrategy.bbox,
+		}),
+		style: style,
+		opacity: parseInt(opacity),
 		visible: false,
 	})
 }
@@ -168,13 +285,12 @@ var map = new ol.Map({
 });
 
 
-
+//Overlay
 var layer_datas;
-var element = document.getElementById('popup');
 var coordElement = document.getElementById('olPopup');
 
 var olPopup = new ol.Overlay({
-	element:coordElement,
+	element: coordElement,
 });
 map.addOverlay(olPopup);
 
@@ -185,31 +301,31 @@ map.on('click', function(evt) {
 
 		return feature;
 	});
-	if(feature){
+	if (feature) {
 		var coordinate = evt.coordinate;
-		var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:3857','EPSG:4326'));
-		
+		var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326'));
+
 		$(coordElement).popover('destroy');
 		olPopup.setPosition(coordinate);
-		
+
 		$(coordElement).popover({
-			placement:'top',
-			animation:false,
-			html:true,
-			content:'<p>지금 위치?</p><code>'+ hdms+'</code>',
+			placement: 'top',
+			animation: false,
+			html: true,
+			content: '<p>지금 위치?</p><code>' + hdms + '</code>',
 		});
 		$(coordElement).popover('show');
-	}else{
+	} else {
 		$(coordElement).popover('destroy');
 	}
 });
 
-map.on('pointermove', function(e){
-		if(e.dragging){
-			$(coordElement).popover('destroy');
-			return;
-		}
-		var pixel = map.getEventPixel(e.originalEvent);
-		var hit = map.hasFeatureAtPixel(pixel);
-		map.getTarget().style.cursor = hit ? 'pointer' : '';
-	});
+map.on('pointermove', function(e) {
+	if (e.dragging) {
+		$(coordElement).popover('destroy');
+		return;
+	}
+	var pixel = map.getEventPixel(e.originalEvent);
+	var hit = map.hasFeatureAtPixel(pixel);
+	map.getTarget().style.cursor = hit ? 'pointer' : '';
+});

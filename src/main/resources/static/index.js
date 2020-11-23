@@ -10,7 +10,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
+						<input value="${Object.values(data[i])}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -40,7 +40,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
+						<input value="${Object.values(data[i])}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -58,7 +58,7 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${Object.values(data[i])}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -76,7 +76,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
+						<input value="${Object.values(data[i])}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -94,7 +94,7 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${Object.values(data[i])}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -112,7 +112,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${data[i].data_name},${data[i].layer_type}" type="checkbox"
+						<input value="${Object.values(data[i])}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -130,7 +130,8 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -142,8 +143,24 @@ $.ajax({
 });
 
 
- 
+//changeStyle test
+$(document).on("click", "#changeStyle", function() {
+	var style_layer_data = this.value;
+	style_layer_data = style_layer_data.split(',');
+	var data_length = style_layer_data.length;
+	
+	if(style_layer_data[data_length-1] == 'polygon'){
+		console.log("polygon");
+	}
+	else if(style_layer_data[data_length-1] == 'point'){
+		console.log("point");
+	}
+	else if(style_layer_data[data_length-1] == 'line'){
+		console.log("line");
+	}
 
+
+});
 
 //update modal data
 $(document).on("click", "#updatelayer", function() {
