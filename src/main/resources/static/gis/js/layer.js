@@ -7,6 +7,7 @@ var send_array = Array();
 //checkbox Array
 var checked_layer = $(".checkSelect");
 
+
 $(document).ready(function() {
 
 	for (i = 1; i < checked_layer.length; i++) {
@@ -168,29 +169,47 @@ var map = new ol.Map({
 
 
 
-var popup = new ol.Overlay({
-	element: document.getElementById('popup'),
-});
-map.addOverlay(popup);
+var layer_datas;
+var element = document.getElementById('popup');
+var coordElement = document.getElementById('olPopup');
 
-var vienna = new ol.Overlay({
-	position: pos,
-	element: document.getElementById('vienna'),
+var olPopup = new ol.Overlay({
+	element:coordElement,
 });
-map.addOverlay(vienna);
-
-var marker = new ol.Overlay({
-	position: pos,
-	positioning: 'center-center',
-	element: document.getElementById('marker'),
-	stopEvent: false,
-});
-map.addOverlay(marker);
-
-var pos = ol.proj.fromLonLat([-151, 60.68]);
+map.addOverlay(olPopup);
 
 map.on('click', function(evt) {
-	map.forEachFeatureAtPixel(evt.pixel, function(ff) {
-		console.log(ff.getProperties());
-	})
-})
+	var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+		layer_datas = feature.getProperties();
+		console.log(layer_datas);
+
+		return feature;
+	});
+	if(feature){
+		var coordinate = evt.coordinate;
+		var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:3857','EPSG:4326'));
+		
+		$(coordElement).popover('destroy');
+		olPopup.setPosition(coordinate);
+		
+		$(coordElement).popover({
+			placement:'top',
+			animation:false,
+			html:true,
+			content:'<p>지금 위치?</p><code>'+ hdms+'</code>',
+		});
+		$(coordElement).popover('show');
+	}else{
+		$(coordElement).popover('destroy');
+	}
+});
+
+map.on('pointermove', function(e){
+		if(e.dragging){
+			$(coordElement).popover('destroy');
+			return;
+		}
+		var pixel = map.getEventPixel(e.originalEvent);
+		var hit = map.hasFeatureAtPixel(pixel);
+		map.getTarget().style.cursor = hit ? 'pointer' : '';
+	});
