@@ -1,7 +1,6 @@
 $(document).ready(function() {
+
 });
-
-
 
 //raster list
 $.ajax({
@@ -58,7 +57,8 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${Object.values(data[i])}">
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -94,7 +94,8 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" value="${Object.values(data[i])}">
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -130,8 +131,8 @@ $.ajax({
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}">
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}"">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -142,25 +143,6 @@ $.ajax({
 	}
 });
 
-
-//changeStyle test
-$(document).on("click", "#changeStyle", function() {
-	var style_layer_data = this.value;
-	style_layer_data = style_layer_data.split(',');
-	var data_length = style_layer_data.length;
-	
-	if(style_layer_data[data_length-1] == 'polygon'){
-		console.log("polygon");
-	}
-	else if(style_layer_data[data_length-1] == 'point'){
-		console.log("point");
-	}
-	else if(style_layer_data[data_length-1] == 'line'){
-		console.log("line");
-	}
-
-
-});
 
 //update modal data
 $(document).on("click", "#updatelayer", function() {

@@ -10,7 +10,6 @@
 <title>ALASKA_GIS</title>
 
 <link th:href="@{~/jquery/css/jquery-ui.css}" rel="stylesheet">
-<link th:href="@{~/jquery-ui/css/jquery-ui.css}" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link th:href="@{~/bootstrap/vendor/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet">
@@ -38,13 +37,9 @@
 	min-width: 276px;
 }
 </style>
-
 </head>
-
 <body>
-
 	<div id="wrapper">
-
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -69,7 +64,7 @@
 						<ul class="leftCol" id="leftCol">
 							<h3>
 								<input type="checkbox" name="allCheckbox" id="allCheckbox"
-									class="checkSelect"> Alaska
+									class="checkSelect2"> Alaska
 							</h3>
 							<hr>
 							<!--layer list-->
@@ -84,10 +79,79 @@
 		<div id="page-wrapper">
 			<!-- map -->
 			<div id="map" class="map">
+				<div id="dialog-message1" title="" style='display: none'>
+					<h1>점</h1>
+					<br>
+					<div class="form-group">
+						<label>모양</label>
+						<label class="radio-inline"> <input type="radio"
+							name="point_shape" value="circle" checked> <i
+							class="fa fa-circle-o"></i>
+						</label> <label class="radio-inline"> <input type="radio"
+							name="point_shape" value="square"> <i
+							class="fa fa-square"></i>
+						</label> <label class="radio-inline"> <input type="radio"
+							name="point_shape" value="triangel"> <i
+							class="glyphicon glyphicon-triangle-top"></i>
+						</label> <label class="radio-inline"> <input type="radio"
+							name="point_shape" value="star"> <i
+							class="fa fa-star"></i>
+						</label>
+					</div>
+					<div class="form-group">
+						<label>색상</label> <input type="color" id="pfill_color"
+							name="pfill_color">
+					</div>
+					<div class="form-group">
+						<label>크기</label> <input id="point_radius"
+							name="point_radius" type="text"> px
+					</div>
+					<label>투명도</label> <input type="range" class="custom-range"
+						id="popacity" max="1" min="0">
+				</div>
+				
+				<div id="dialog-message2" title="" style='display: none'>
+					<h1>선</h1>
+					<br>
+					<div class="form-group">
+						<label>색상</label> <input type="color" id="fill_color"
+							name="fill_color">
+					</div>
+					<div class="form-group">
+						<label>굵기</label> <input id="fline_width"
+							name="fline_width" type="text"> px
+					</div>
+					<br>
+					<h1>면</h1>
+					<br>
+					<div class="form-group">
+						<label>색상</label> <input type="color" id="fill_color"
+							name="fill_color">
+					</div>
+					<label>투명도</label> <input type="range" class="custom-range"
+						id="opacity" max="1" min="0">
+				</div>
+				
+				<div id="dialog-message3" title="" style='display: none'>
+					<h1>선</h1>
+					<br>
+					<div class="form-group">
+						<label>색상</label> <input type="color" id="fill_color"
+							name="fill_color">
+					</div>
+					<div class="form-group">
+						<label>굵기</label> <input id="line_width"
+							name="line_width"> px
+					</div>
+					<label>투명도</label> <input type="range" class="custom-range"
+						id="opacity" max="1" min="0">
+				</div>
+				
 				<div style="display: none;">
 					<div id="olPopup" title="Welcome to OpenLayers"></div>
 				</div>
 			</div>
+			<div id="info">&nbsp;</div>
 			<!-- /#page-wrapper -->
 
 		</div>
@@ -176,9 +240,7 @@
 		</form>
 		<script th:src="@{~/jquery/js/jquery-1.12.4.js}"></script>
 		<script th:src="@{~/jquery/js/jquery-ui.js}"></script>
-		<script th:src="@{~/jquery-ui/js/jquery-ui.js}"></script>
 		<!-- jQuery -->
-		<script th:src="@{~/bootstrap/vendor/jquery/jquery.min.js}"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script th:src="@{~/bootstrap/vendor/bootstrap/js/bootstrap.min.js}"></script>
 		<!-- Metis Menu Plugin JavaScript -->
