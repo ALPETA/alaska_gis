@@ -197,65 +197,55 @@ public class TestController {
 
 	// update polygon layer style
 	@RequestMapping("/update/polygon/style")
-	private String boardUpdatePolygonStyle(HttpServletRequest request) throws Exception {
+	@ResponseBody
+	private void boardUpdatePolygonStyle(HttpServletRequest request) throws Exception {
 
 		PolygonDto polygonDto = new PolygonDto();
 
 		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
-		polygonDto.setLocal_name(request.getParameter("local_name"));
-		polygonDto.setLine_color(request.getParameter("line_color"));
-		polygonDto.setLine_width(Integer.parseInt(request.getParameter("line_width")));
-		polygonDto.setFill_color(request.getParameter("fill_color"));
-		polygonDto.setOpacity(Integer.parseInt(request.getParameter("opacity")));
+		polygonDto.setLine_color(request.getParameter("plline_fill_color"));
+		polygonDto.setLine_width(Integer.parseInt(request.getParameter("pllline_width")));
+		polygonDto.setFill_color(request.getParameter("plfill_color"));
+		polygonDto.setOpacity(Integer.parseInt(request.getParameter("plopacity")));
 
 		testService.updatePolygonStyle(polygonDto);
 
-		return "redirect:/";
 	}
 
 	// update point layer style
 	@RequestMapping("/update/point/style")
-	private String boardUpdatePointStyle(HttpServletRequest request) throws Exception {
+	@ResponseBody
+	private void boardUpdatePointStyle(HttpServletRequest request) throws Exception {
 
 		PointDto pointDto = new PointDto();
 
 		pointDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
-		pointDto.setLocal_name(request.getParameter("local_name"));
 		pointDto.setPoint_shape(request.getParameter("point_shape"));
-		pointDto.setFill_color(request.getParameter("fill_color"));
+		pointDto.setFill_color(request.getParameter("pofill_color"));
 		pointDto.setPoint_radius(Integer.parseInt(request.getParameter("point_radius")));
-		pointDto.setOpacity(Integer.parseInt(request.getParameter("opacity")));
+		pointDto.setOpacity(Integer.parseInt(request.getParameter("popacity")));
 
 		testService.updatePointStyle(pointDto);
 
-		return "redirect:/";
 	}
 
 	// update line layer style
 	@RequestMapping("/update/line/style")
-	private String boardUpdateLineStyle(HttpServletRequest request) throws Exception {
+	@ResponseBody
+	private void boardUpdateLineStyle(HttpServletRequest request) throws Exception {
 
 		LineDto lineDto = new LineDto();
 
 		lineDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
-		lineDto.setLocal_name(request.getParameter("local_name"));
-		lineDto.setLine_color(request.getParameter("line_color"));
-		lineDto.setLine_width(Integer.parseInt(request.getParameter("line_width")));
-		lineDto.setOpacity(Integer.parseInt(request.getParameter("opacity")));
+		lineDto.setLine_color(request.getParameter("liline_color"));
+		lineDto.setLine_width(Integer.parseInt(request.getParameter("liline_width")));
+		lineDto.setOpacity(Integer.parseInt(request.getParameter("liopacity")));
 
 		testService.updateLineStyle(lineDto);
 
-		return "redirect:/";
 	}
 
-	// delete
-	@RequestMapping("/delete/{layer_num}")
-	private String boardDelete(@PathVariable int layer_num) throws Exception {
-
-		testService.deleteLayer(layer_num);
-
-		return "redirect:/";
-	}
+	
 
 	// delete from raster layer
 	@RequestMapping("/delete/raster/{layer_num}")

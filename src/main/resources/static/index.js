@@ -177,7 +177,6 @@ function validateupdateForm() {
 	}
 	else {
 		if (z == "raster") {
-			console.log(z);
 			$("#updateForm").attr("action", "/update/raster/name");
 		}
 		else if (z == "polygon") {

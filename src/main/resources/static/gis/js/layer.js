@@ -62,15 +62,18 @@ $(document).on("click", "#changeStyle", function() {
 	var data_length = style_layer_data.length;
 
 	if (style_layer_data[data_length - 1] == 'polygon') {
+		
 		$('#dialog-message2').dialog({
 			title: style_layer_data[1],
 			buttons: {
 				"SAVE": function() { $(this).dialog('close'); },
 			}
 		});
-		
-		$('#dialog-message1').dialog('close');
-		$('#dialog-message3').dialog('close');
+		$("#plline_fill_color").val(style_layer_data[3]);
+		$("#pllline_width").val(style_layer_data[4]);
+		$("#plfill_color").val(style_layer_data[5]);
+		$("#plopacity").val(style_layer_data[6]);
+		$("#polygon_num").val(style_layer_data[0]);
 	}
 	else if (style_layer_data[data_length - 1] == 'point') {
 		$('#dialog-message1').dialog({
@@ -79,8 +82,11 @@ $(document).on("click", "#changeStyle", function() {
 				"SAVE": function() { $(this).dialog('close'); },
 			}
 		});
-		$('#dialog-message2').dialog('close');
-		$('#dialog-message3').dialog('close');
+		$('[name=point_shape]:radio[value="'+ style_layer_data[3] +'"]').prop('checked', true );
+		$("#pofill_color").val(style_layer_data[4]);
+		$("#point_radius").val(style_layer_data[5]);
+		$("#popacity").val(style_layer_data[6]);
+		$("#point_num").val(style_layer_data[0]);
 	}
 	else if (style_layer_data[data_length - 1] == 'line') {
 		$('#dialog-message3').dialog({
@@ -89,8 +95,10 @@ $(document).on("click", "#changeStyle", function() {
 				"SAVE": function() { $(this).dialog('close'); },
 			}
 		});
-		$('#dialog-message1').dialog('close');
-		$('#dialog-message2').dialog('close');
+		$("#liline_color").val(style_layer_data[3]);
+		$("#liline_width").val(style_layer_data[4]);
+		$("#liopacity").val(style_layer_data[5]);
+		$("#line_num").val(style_layer_data[0]);
 	}
 
 
