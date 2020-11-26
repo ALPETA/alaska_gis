@@ -26,6 +26,7 @@ $.ajax({
 										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
 								</span>
+								<br>
 							</li>`)
 
 		}
@@ -63,6 +64,7 @@ $.ajax({
 									</button>
 									
 								</span>
+								<br>
 							</li>`)
 
 		}
@@ -100,6 +102,7 @@ $.ajax({
 									</button>
 									
 								</span>
+								<br>
 							</li>`)
 
 		}
@@ -137,6 +140,7 @@ $.ajax({
 									</button>
 									
 								</span>
+								<br>
 							</li>`)
 
 		}

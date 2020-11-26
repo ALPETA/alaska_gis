@@ -100,25 +100,27 @@
 					<ul class="nav" id="side-menu">
 						<li class="sidebar-search">
 							<div class="input-group custom-search-form">
+								<h3>
+									<input type="checkbox" name="allCheckbox" id="allCheckbox"
+										class="checkSelect2"> Alaska
+								</h3>
 								<button id="insertLayer" class="btn btn-primary"
 									data-toggle="modal" data-target="#insertmodal">레이어 추가</button>
 							</div> <!-- /input-group -->
 						</li>
-						<ul class="leftCol" id="leftCol">
-							<h3>
-								<input type="checkbox" name="allCheckbox" id="allCheckbox"
-									class="checkSelect2"> Alaska
-							</h3>
-							<hr>
-							<!--layer list-->
-						</ul>
+						<div class="jbtscroll">
+							<ul class="leftCol ulstyle" id="leftCol">
+								<br>
+								<!--layer list-->
+							</ul>
+						</div>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
 			</div>
 			<!-- /.navbar-static-side -->
 		</nav>
-
+</div>
 		<div id="page-wrapper">
 			<!-- map -->
 			<div id="map" class="map">

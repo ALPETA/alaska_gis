@@ -186,7 +186,7 @@
 	</update>
 	
 	<!--update point -->
-	<update id="updatePointr"
+	<update id="updatePoint"
 		parameterType="com.alaska.test.dto.PointDto">
 		UPDATE alaska_points
 		SET
@@ -222,7 +222,7 @@
 		parameterType="com.alaska.test.dto.PointDto">
 		UPDATE alaska_points
 		SET
-		point_shape = #{line_color},
+		point_shape = #{point_shape},
 		fill_color = #{fill_color},
 		point_radius = #{point_radius},
 		opacity = #{opacity}

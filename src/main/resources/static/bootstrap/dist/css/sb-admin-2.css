@@ -17,10 +17,19 @@ body {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 250px;
+    margin: 0 0 0 275px;
     padding: 0 30px;
     border-left: 1px solid #e7e7e7;
   }
+}
+.jbtscroll{
+  overflow-y: scroll;
+  height: 540px;
+  width: 300px;
+}
+
+.ulstyle{
+  list-style: none;
 }
 .navbar-top-links {
   margin-right: 0;
@@ -70,7 +79,6 @@ body {
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
-  overflow: scroll;
   height: 670px;
 }
 .sidebar .sidebar-search {
@@ -105,7 +113,7 @@ body {
   .sidebar {
     z-index: 1;
     position: absolute;
-    width: 270px;
+    width: 300px;
     margin-top: 51px;
   }
   .navbar-top-links .dropdown-messages,

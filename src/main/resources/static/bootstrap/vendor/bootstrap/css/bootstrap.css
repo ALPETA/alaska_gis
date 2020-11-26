@@ -6754,4 +6754,10 @@ button.close {
     display: none !important;
   }
 }
+
+.jbtscroll{
+  overflow: scroll;
+  height: 540px;
+  width: 270px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -8,14 +8,15 @@ var send_array_num = -1;
 //checkbox Array
 var checked_layer = $(".checkSelect");
 
+var check_list = [];
+
 $(document).ready(function() {
 	layerinput();
 });
 function layerinput() {
-	send_array.length = 0;
-
 	$.ajax({
 		url: "/list/raster",
+		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[i] = newTileLayer(Object.values(data[i]));
@@ -27,6 +28,7 @@ function layerinput() {
 
 	$.ajax({
 		url: "/list/polygon",
+		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_polygon(Object.values(data[i]));
@@ -38,6 +40,7 @@ function layerinput() {
 
 	$.ajax({
 		url: "/list/point",
+		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_point(Object.values(data[i]));
@@ -49,6 +52,7 @@ function layerinput() {
 
 	$.ajax({
 		url: "/list/line",
+		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_line(Object.values(data[i]));
@@ -116,7 +120,6 @@ $(document).on("click", "#changeStyle", function() {
 				},
 			}
 		});
-
 	}
 	else if (style_layer_data[data_length - 1] == 'point') {
 		$('[name=point_shape]:radio[value="' + style_layer_data[3] + '"]').prop('checked', true);
@@ -128,7 +131,7 @@ $(document).on("click", "#changeStyle", function() {
 			title: style_layer_data[1],
 			buttons: {
 				"SAVE": function() {
-					var point_shape = $("#point_shape").val()
+					var point_shape = $('input[name=point_shape]:checked').val()
 					var pofill_color = $("#pofill_color").val()
 					var point_radius = $("#point_radius").val()
 					var popacity = $("#popacity").val()
@@ -231,6 +234,7 @@ $(document).on("change", "#allCheckbox", function() {
 				if (send_array[r].values_.layerName == data_name) {
 
 					if ($(checked_layer[r]).attr("class").split(" ")[1] == "active") {
+						
 						continue;
 					}
 					else {
@@ -485,7 +489,7 @@ map.on('click', function(evt) {
 
 		content.innerHTML = `<code>${table_data}</code>`
 		olPopup.setPosition(coordinate);
-		
+
 	}
 });
 
