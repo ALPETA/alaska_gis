@@ -205,10 +205,10 @@ public class TestController {
 
 		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("polygon_num")));
 		polygonDto.setLine_color(request.getParameter("plline_fill_color"));
-		polygonDto.setLine_width(Integer.parseInt(request.getParameter("pllline_width")));
+		polygonDto.setLine_width(Float.parseFloat(request.getParameter("pllline_width")));
 		polygonDto.setFill_color(request.getParameter("plfill_color"));
-		polygonDto.setOpacity(Integer.parseInt(request.getParameter("plopacity")));
-
+		polygonDto.setOpacity(Float.parseFloat(request.getParameter("plopacity")));
+		
 		testService.updatePolygonStyle(polygonDto);
 
 	}
@@ -223,8 +223,8 @@ public class TestController {
 		pointDto.setLayer_num(Integer.parseInt(request.getParameter("point_num")));
 		pointDto.setPoint_shape(request.getParameter("point_shape"));
 		pointDto.setFill_color(request.getParameter("pofill_color"));
-		pointDto.setPoint_radius(Integer.parseInt(request.getParameter("point_radius")));
-		pointDto.setOpacity(Integer.parseInt(request.getParameter("popacity")));
+		pointDto.setPoint_radius(Float.parseFloat(request.getParameter("point_radius")));
+		pointDto.setOpacity(Float.parseFloat(request.getParameter("popacity")));
 
 		testService.updatePointStyle(pointDto);
 
@@ -239,8 +239,8 @@ public class TestController {
 
 		lineDto.setLayer_num(Integer.parseInt(request.getParameter("line_num")));
 		lineDto.setLine_color(request.getParameter("liline_color"));
-		lineDto.setLine_width(Integer.parseInt(request.getParameter("liline_width")));
-		lineDto.setOpacity(Integer.parseInt(request.getParameter("liopacity")));
+		lineDto.setLine_width(Float.parseFloat(request.getParameter("liline_width")));
+		lineDto.setOpacity(Float.parseFloat(request.getParameter("liopacity")));
 
 		testService.updateLineStyle(lineDto);
 

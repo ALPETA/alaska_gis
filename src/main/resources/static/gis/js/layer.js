@@ -86,7 +86,6 @@ $(document).on("click", "#changeStyle", function() {
 		for (var i = 0; i < polygon_datas.length; i++) {
 			if (polygon_datas[i][0] == parseInt(style_layer_data[0])) {
 				title = polygon_datas[i][1];
-				console.log(title)
 				$("#plline_fill_color").val(polygon_datas[i][3]);
 				$("#pllline_width").val(polygon_datas[i][4]);
 				$("#plfill_color").val(polygon_datas[i][5]);
@@ -100,10 +99,10 @@ $(document).on("click", "#changeStyle", function() {
 			buttons: {
 				"SAVE": function() {
 					var plline_fill_color = $("#plline_fill_color").val()
-					var pllline_width = $("#pllline_width").val()
+					var pllline_width = parseFloat($("#pllline_width").val())
 					var plfill_color = $("#plfill_color").val()
-					var plopacity = $("#plopacity").val()
-					var polygon_num = $("#polygon_num").val()
+					var plopacity = parseFloat($("#plopacity").val())
+					var polygon_num = parseInt($("#polygon_num").val())
 					$.ajax({
 						data: {
 							"plline_fill_color": plline_fill_color,
@@ -117,7 +116,7 @@ $(document).on("click", "#changeStyle", function() {
 							var newstyle = new ol.style.Style({
 								stroke: new ol.style.Stroke({
 									color: plline_fill_color,
-									width: parseInt(pllline_width),
+									width: parseFloat(pllline_width),
 								}),
 								fill: new ol.style.Fill({
 									color: plfill_color,
@@ -126,6 +125,7 @@ $(document).on("click", "#changeStyle", function() {
 							for (var i = 0; i < send_array.length; i++) {
 								if (send_array[i].values_.layerName == style_layer_data[1]) {
 									send_array[i].style_ = newstyle;
+									send_array[i].values_.opacity=plopacity;
 								}
 							}
 							listagain()
@@ -155,9 +155,9 @@ $(document).on("click", "#changeStyle", function() {
 				"SAVE": function() {
 					var point_shape = $('input[name=point_shape]:checked').val()
 					var pofill_color = $("#pofill_color").val()
-					var point_radius = $("#point_radius").val()
-					var popacity = $("#popacity").val()
-					var point_num = $("#point_num").val()
+					var point_radius = parseFloat($("#point_radius").val())
+					var popacity = parseFloat($("#popacity").val())
+					var point_num = parseInt($("#point_num").val())
 					$.ajax({
 						data: {
 							"point_shape": point_shape,
@@ -193,9 +193,9 @@ $(document).on("click", "#changeStyle", function() {
 			buttons: {
 				"SAVE": function() {
 					var liline_color = $("#liline_color").val()
-					var liline_width = $("#liline_width").val()
-					var liopacity = $("#liopacity").val()
-					var line_num = $("#line_num").val()
+					var liline_width = parseFloat($("#liline_width").val())
+					var liopacity = parseFloat($("#liopacity").val())
+					var line_num = parseInt($("#line_num").val())
 					$.ajax({
 						data: {
 							"liline_color": liline_color,
@@ -326,7 +326,7 @@ function newVectorLayer_polygon(polygonData) {
 			strategy: ol.loadingstrategy.bbox,
 		}),
 		style: style,
-		opacity: parseInt(polygonData[6]),
+		opacity: parseFloat(polygonData[6]),
 		visible: false,
 	})
 }
@@ -339,7 +339,7 @@ function newVectorLayer_point(pointData) {
 		style = new ol.style.Style({
 			image: new ol.style.Circle({
 				fill: new ol.style.Fill({ color: pointData[4] }),
-				radius: parseInt(pointData[5]),
+				radius: parseFloat(pointData[5]),
 			}),
 		});
 	}
@@ -348,7 +348,7 @@ function newVectorLayer_point(pointData) {
 			image: new ol.style.RegularShape({
 				fill: new ol.style.Fill({ color: pointData[4] }),
 				points: 4,
-				radius: parseInt(pointData[5]),
+				radius: parseFloat(pointData[5]),
 				angle: Math.PI / 4,
 			}),
 		});
@@ -358,7 +358,7 @@ function newVectorLayer_point(pointData) {
 			image: new ol.style.RegularShape({
 				fill: new ol.style.Fill({ color: pointData[4] }),
 				points: 3,
-				radius: parseInt(pointData[5]),
+				radius: parseFloat(pointData[5]),
 
 			}),
 		});
@@ -368,8 +368,8 @@ function newVectorLayer_point(pointData) {
 			image: new ol.style.RegularShape({
 				fill: new ol.style.Fill({ color: pointData[4] }),
 				points: 5,
-				radius: parseInt(pointData[5]),
-				radius2: parseInt(pointData[5] / 2),
+				radius: parseFloat(pointData[5]),
+				radius2: parseFloat(pointData[5] / 2),
 			}),
 		});
 	}
@@ -392,7 +392,7 @@ function newVectorLayer_point(pointData) {
 			strategy: ol.loadingstrategy.bbox,
 		}),
 		style: style,
-		opacity: parseInt(pointData[6]),
+		opacity: parseFloat(pointData[6]),
 		visible: false,
 	})
 }
@@ -402,7 +402,7 @@ function newVectorLayer_line(lineData) {
 	var style = new ol.style.Style({
 		stroke: new ol.style.Stroke({
 			color: lineData[3],
-			width: parseInt(lineData[4]),
+			width: parseFloat(lineData[4]),
 		}),
 	})
 
@@ -423,7 +423,7 @@ function newVectorLayer_line(lineData) {
 			strategy: ol.loadingstrategy.bbox,
 		}),
 		style: style,
-		opacity: parseInt(lineData[5]),
+		opacity: parseFloat(lineData[5]),
 		visible: false,
 	})
 }

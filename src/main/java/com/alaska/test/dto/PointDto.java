@@ -11,8 +11,8 @@ public class PointDto {
 	private String data_name;
 	private String point_shape;
 	private String fill_color;
-	private int point_radius;
-	private int opacity;
+	private float point_radius;
+	private float opacity;
 	private String layer_type;
 
 }
