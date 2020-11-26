@@ -3,16 +3,22 @@ var alaska_layer_group = new ol.layer.Group();
 
 //Layer Array
 var send_array = Array();
-var send_array_num = -1;
+var send_array_num = 0;
 
 //checkbox Array
 var checked_layer = $(".checkSelect");
 
 var check_list = [];
 
+var raster_datas = Array();
+var polygon_datas = Array();
+var point_datas = Array();
+var line_datas = Array();
+
 $(document).ready(function() {
 	layerinput();
 });
+
 function layerinput() {
 	$.ajax({
 		url: "/list/raster",
@@ -20,7 +26,9 @@ function layerinput() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[i] = newTileLayer(Object.values(data[i]));
+				raster_datas[i] = (Object.values(data[i]));
 				alaska_layer_group.getLayers().push(send_array[i]);
+				raster_datas[i] = (Object.values(data[i]));
 				send_array_num++
 			}
 		}
@@ -32,6 +40,7 @@ function layerinput() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_polygon(Object.values(data[i]));
+				polygon_datas[i] = (Object.values(data[i]));
 				alaska_layer_group.getLayers().push(send_array[send_array_num]);
 				send_array_num++
 			}
@@ -44,6 +53,7 @@ function layerinput() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_point(Object.values(data[i]));
+				point_datas[i] = (Object.values(data[i]));
 				alaska_layer_group.getLayers().push(send_array[send_array_num]);
 				send_array_num++
 			}
@@ -56,6 +66,7 @@ function layerinput() {
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
 				send_array[send_array_num] = newVectorLayer_line(Object.values(data[i]));
+				line_datas[i] = (Object.values(data[i]));
 				alaska_layer_group.getLayers().push(send_array[send_array_num]);
 				send_array_num++
 			}
@@ -69,19 +80,23 @@ function layerinput() {
 $(document).on("click", "#changeStyle", function() {
 	var style_layer_data = this.value;
 	style_layer_data = style_layer_data.split(',');
-	var data_length = style_layer_data.length;
-
-	var formData = $("#polygon_form").serialize();
-	$("#plline_fill_color").val(style_layer_data[3]);
-	$("#pllline_width").val(style_layer_data[4]);
-	$("#plfill_color").val(style_layer_data[5]);
-	$("#plopacity").val(style_layer_data[6]);
-	$("#polygon_num").val(style_layer_data[0]);
-
-
-	if (style_layer_data[data_length - 1] == 'polygon') {
+	var title;
+	
+	if (style_layer_data[1] == 'polygon') {
+		for (var i = 0; i < polygon_datas.length; i++) {
+			if (polygon_datas[i][0] == parseInt(style_layer_data[0])) {
+				title = polygon_datas[i][1];
+				console.log(title)
+				$("#plline_fill_color").val(polygon_datas[i][3]);
+				$("#pllline_width").val(polygon_datas[i][4]);
+				$("#plfill_color").val(polygon_datas[i][5]);
+				$("#plopacity").val(polygon_datas[i][6]);
+				$("#polygon_num").val(polygon_datas[i][0]);
+				break;
+			}
+		}
 		$('#dialog-message2').dialog({
-			title: style_layer_data[1],
+			title: title,
 			buttons: {
 				"SAVE": function() {
 					var plline_fill_color = $("#plline_fill_color").val()
@@ -89,7 +104,6 @@ $(document).on("click", "#changeStyle", function() {
 					var plfill_color = $("#plfill_color").val()
 					var plopacity = $("#plopacity").val()
 					var polygon_num = $("#polygon_num").val()
-					console.log(polygon_num)
 					$.ajax({
 						data: {
 							"plline_fill_color": plline_fill_color,
@@ -112,23 +126,31 @@ $(document).on("click", "#changeStyle", function() {
 							for (var i = 0; i < send_array.length; i++) {
 								if (send_array[i].values_.layerName == style_layer_data[1]) {
 									send_array[i].style_ = newstyle;
-									listagain();
 								}
 							}
+							listagain()
 						}
 					});
 				},
 			}
 		});
 	}
-	else if (style_layer_data[data_length - 1] == 'point') {
-		$('[name=point_shape]:radio[value="' + style_layer_data[3] + '"]').prop('checked', true);
-		$("#pofill_color").val(style_layer_data[4]);
-		$("#point_radius").val(style_layer_data[5]);
-		$("#popacity").val(style_layer_data[6]);
-		$("#point_num").val(style_layer_data[0]);
+	else if (style_layer_data[1] == 'point') {
+
+		for (var i = 0; i < polygon_datas.length; i++) {
+			if (point_datas[i][0] == parseInt(style_layer_data[0])) {
+				title = point_datas[i][1];
+				$('[name=point_shape]:radio[value="' + point_datas[i][3] + '"]').prop('checked', true);
+				$("#pofill_color").val(point_datas[i][4]);
+				$("#point_radius").val(point_datas[i][5]);
+				$("#popacity").val(point_datas[i][6]);
+				$("#point_num").val(point_datas[i][0]);
+				break;
+			}
+		}
+
 		$('#dialog-message1').dialog({
-			title: style_layer_data[1],
+			title: title,
 			buttons: {
 				"SAVE": function() {
 					var point_shape = $('input[name=point_shape]:checked').val()
@@ -146,7 +168,6 @@ $(document).on("click", "#changeStyle", function() {
 						},
 						url: "/update/style/point",
 						success: function(data) {
-							console.log("!");
 							listagain()
 
 
@@ -156,13 +177,19 @@ $(document).on("click", "#changeStyle", function() {
 			}
 		});
 	}
-	else if (style_layer_data[data_length - 1] == 'line') {
-		$("#liline_color").val(style_layer_data[3]);
-		$("#liline_width").val(style_layer_data[4]);
-		$("#liopacity").val(style_layer_data[5]);
-		$("#line_num").val(style_layer_data[0]);
+	else if (style_layer_data[1] == 'line') {
+		for (var i = 0; i < polygon_datas.length; i++) {
+			if (line_datas[i][0] == parseInt(style_layer_data[0])) {
+				title = line_datas[i][1];
+				$("#liline_color").val(line_datas[i][3]);
+				$("#liline_width").val(line_datas[i][4]);
+				$("#liopacity").val(line_datas[i][5]);
+				$("#line_num").val(line_datas[i][0]);
+				break;
+			}
+		}
 		$('#dialog-message3').dialog({
-			title: style_layer_data[1],
+			title: title,
 			buttons: {
 				"SAVE": function() {
 					var liline_color = $("#liline_color").val()
@@ -178,7 +205,6 @@ $(document).on("click", "#changeStyle", function() {
 						},
 						url: "/update/style/line",
 						success: function(data) {
-							console.log("!");
 							listagain()
 
 
@@ -234,7 +260,7 @@ $(document).on("change", "#allCheckbox", function() {
 				if (send_array[r].values_.layerName == data_name) {
 
 					if ($(checked_layer[r]).attr("class").split(" ")[1] == "active") {
-						
+
 						continue;
 					}
 					else {
@@ -504,38 +530,13 @@ map.on('pointermove', function(e) {
 });
 
 function listagain() {
-	$(".leftCol").empty();
 
-	$(".leftCol").append(`<h3>
-								<input type="checkbox" name="allCheckbox" id="allCheckbox"
-									class="checkSelect2"> Alaska
-							</h3>
-							<hr>`)
 	$.ajax({
 		url: "/list/raster",
 		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
-								<label>${data[i].local_name}</label>
-								
-								<span class="input-group-btn">
-								
-									<button id="updatelayer" name="updatelayer"
-										class="btn btn-info btn-sm"
-										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										<i class="fa fa-pencil-square"></i></button>
-										
-									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-trash-o"></i></button>
-									<input type="hidden" value="${data[i].layer_type}">
-								</span>
-							</li>`)
-
+				raster_datas[i] = (Object.values(data[i]));
 			}
 		}
 	});
@@ -546,33 +547,7 @@ function listagain() {
 		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
-								<label>${data[i].local_name}</label>
-								
-								<span class="input-group-btn">
-								
-									<button id="updatelayer" name="updatelayer"
-										class="btn btn-info btn-sm"
-										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										<i class="fa fa-pencil-square"></i></button>
-										
-									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-trash-o"></i></button>
-									<input type="hidden" value="${data[i].layer_type}">
-										
-									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}">
-										<i class="fa fa-gear"></i>
-									</button>
-									
-								</span>
-							</li>`)
-
+				polygon_datas[i] = (Object.values(data[i]));
 			}
 		}
 	});
@@ -583,33 +558,7 @@ function listagain() {
 		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
-								<label>${data[i].local_name}</label>
-								
-								<span class="input-group-btn">
-								
-									<button id="updatelayer" name="updatelayer"
-										class="btn btn-info btn-sm"
-										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										<i class="fa fa-pencil-square"></i></button>
-										
-									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-trash-o"></i></button>
-									<input type="hidden" value="${data[i].layer_type}">
-										
-									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}">
-										<i class="fa fa-gear"></i>
-									</button>
-									
-								</span>
-							</li>`)
-
+				point_datas[i] = (Object.values(data[i]));
 			}
 		}
 	});
@@ -620,35 +569,9 @@ function listagain() {
 		async: false,
 		success: function(data) {
 			for (var i = 0; i < data.length; i++) {
-				$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
-								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
-								<label>${data[i].local_name}</label>
-								
-								<span class="input-group-btn">
-								
-									<button id="updatelayer" name="updatelayer"
-										class="btn btn-info btn-sm"
-										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										<i class="fa fa-pencil-square"></i></button>
-										
-									<button id="deleteLayer" name="deleteLayer"
-										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										<i class="fa fa-trash-o"></i></button>
-									<input type="hidden" value="${data[i].layer_type}">
-										
-									<!--style 변경-->	
-									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}"">
-										<i class="fa fa-gear"></i>
-									</button>
-									
-								</span>
-							</li>`)
-
+				line_datas[i] = (Object.values(data[i]));
 			}
+
 		}
 	});
-	checked_layer = $(".checkSelect");
 }

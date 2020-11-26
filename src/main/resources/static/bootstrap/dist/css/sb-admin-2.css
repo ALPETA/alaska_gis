@@ -22,6 +22,11 @@ body {
     border-left: 1px solid #e7e7e7;
   }
 }
+.jbtalign{
+  float: left;
+  margin-right: 5px;
+}
+
 .jbtscroll{
   overflow-y: scroll;
   height: 540px;

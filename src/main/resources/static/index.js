@@ -9,11 +9,12 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
+						<div class="jbtalign">
+						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
+					
 								<label>${data[i].local_name}</label>
-								
+								</div>	
 								<span class="input-group-btn">
 								
 									<button id="updatelayer" name="updatelayer"
@@ -40,7 +41,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
+						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -59,7 +60,7 @@ $.ajax({
 										
 									<!--style 변경-->	
 									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}">
+										value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -78,7 +79,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
+						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -97,7 +98,7 @@ $.ajax({
 										
 									<!--style 변경-->	
 									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}">
+											value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
@@ -116,7 +117,7 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<input value="${Object.values(data[i])}" type="checkbox"
+						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
 								
 								<label>${data[i].local_name}</label>
@@ -135,7 +136,7 @@ $.ajax({
 										
 									<!--style 변경-->	
 									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
-										value="${Object.values(data[i])}"">
+											value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
 									
