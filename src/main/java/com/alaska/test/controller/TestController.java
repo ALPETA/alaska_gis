@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -136,7 +137,7 @@ public class TestController {
 	}
 
 	// update raster layer name
-	@RequestMapping("/update/raster/name")
+	@RequestMapping("/update/name/raster")
 	private String boardUpdateRaster(HttpServletRequest request) throws Exception {
 
 		RasterDto rasterDto = new RasterDto();
@@ -151,7 +152,7 @@ public class TestController {
 	}
 
 	// update polygon layer name
-	@RequestMapping("/update/polygon/name")
+	@RequestMapping("/update/name/polygon")
 	private String boardUpdatePolygon(HttpServletRequest request) throws Exception {
 
 		PolygonDto polygonDto = new PolygonDto();
@@ -166,7 +167,7 @@ public class TestController {
 	}
 
 	// update point layer name
-	@RequestMapping("/update/point/name")
+	@RequestMapping("/update/name/point")
 	private String boardUpdatePoint(HttpServletRequest request) throws Exception {
 
 		PointDto pointDto = new PointDto();
@@ -181,7 +182,7 @@ public class TestController {
 	}
 
 	// update line layer name
-	@RequestMapping("/update/line/name")
+	@RequestMapping("/update/name/line")
 	private String boardUpdateLine(HttpServletRequest request) throws Exception {
 
 		LineDto lineDto = new LineDto();
@@ -196,13 +197,13 @@ public class TestController {
 	}
 
 	// update polygon layer style
-	@RequestMapping("/update/polygon/style")
+	@RequestMapping("/update/style/polygon")
 	@ResponseBody
-	private void boardUpdatePolygonStyle(HttpServletRequest request) throws Exception {
+	private void boardUpdatePolygonStyle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		PolygonDto polygonDto = new PolygonDto();
 
-		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
+		polygonDto.setLayer_num(Integer.parseInt(request.getParameter("polygon_num")));
 		polygonDto.setLine_color(request.getParameter("plline_fill_color"));
 		polygonDto.setLine_width(Integer.parseInt(request.getParameter("pllline_width")));
 		polygonDto.setFill_color(request.getParameter("plfill_color"));
@@ -213,13 +214,13 @@ public class TestController {
 	}
 
 	// update point layer style
-	@RequestMapping("/update/point/style")
+	@RequestMapping("/update/style/point")
 	@ResponseBody
-	private void boardUpdatePointStyle(HttpServletRequest request) throws Exception {
+	private void boardUpdatePointStyle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		PointDto pointDto = new PointDto();
 
-		pointDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
+		pointDto.setLayer_num(Integer.parseInt(request.getParameter("point_num")));
 		pointDto.setPoint_shape(request.getParameter("point_shape"));
 		pointDto.setFill_color(request.getParameter("pofill_color"));
 		pointDto.setPoint_radius(Integer.parseInt(request.getParameter("point_radius")));
@@ -230,13 +231,13 @@ public class TestController {
 	}
 
 	// update line layer style
-	@RequestMapping("/update/line/style")
+	@RequestMapping("/update/style/line")
 	@ResponseBody
-	private void boardUpdateLineStyle(HttpServletRequest request) throws Exception {
+	private void boardUpdateLineStyle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		LineDto lineDto = new LineDto();
 
-		lineDto.setLayer_num(Integer.parseInt(request.getParameter("update_style_layer_num")));
+		lineDto.setLayer_num(Integer.parseInt(request.getParameter("line_num")));
 		lineDto.setLine_color(request.getParameter("liline_color"));
 		lineDto.setLine_width(Integer.parseInt(request.getParameter("liline_width")));
 		lineDto.setOpacity(Integer.parseInt(request.getParameter("liopacity")));

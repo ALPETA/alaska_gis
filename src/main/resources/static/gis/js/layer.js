@@ -9,6 +9,10 @@ var send_array_num = -1;
 var checked_layer = $(".checkSelect");
 
 $(document).ready(function() {
+	layerinput();
+});
+function layerinput() {
+	send_array.length = 0;
 
 	$.ajax({
 		url: "/list/raster",
@@ -53,7 +57,9 @@ $(document).ready(function() {
 			}
 		}
 	})
-});
+}
+
+
 
 //changeStyle test
 $(document).on("click", "#changeStyle", function() {
@@ -61,44 +67,123 @@ $(document).on("click", "#changeStyle", function() {
 	style_layer_data = style_layer_data.split(',');
 	var data_length = style_layer_data.length;
 
+	var formData = $("#polygon_form").serialize();
+	$("#plline_fill_color").val(style_layer_data[3]);
+	$("#pllline_width").val(style_layer_data[4]);
+	$("#plfill_color").val(style_layer_data[5]);
+	$("#plopacity").val(style_layer_data[6]);
+	$("#polygon_num").val(style_layer_data[0]);
+
+
 	if (style_layer_data[data_length - 1] == 'polygon') {
-		
 		$('#dialog-message2').dialog({
 			title: style_layer_data[1],
 			buttons: {
-				"SAVE": function() { $(this).dialog('close'); },
+				"SAVE": function() {
+					var plline_fill_color = $("#plline_fill_color").val()
+					var pllline_width = $("#pllline_width").val()
+					var plfill_color = $("#plfill_color").val()
+					var plopacity = $("#plopacity").val()
+					var polygon_num = $("#polygon_num").val()
+					console.log(polygon_num)
+					$.ajax({
+						data: {
+							"plline_fill_color": plline_fill_color,
+							"pllline_width": pllline_width,
+							"plfill_color": plfill_color,
+							"plopacity": plopacity,
+							"polygon_num": polygon_num
+						},
+						url: "/update/style/polygon",
+						success: function(data) {
+							var newstyle = new ol.style.Style({
+								stroke: new ol.style.Stroke({
+									color: plline_fill_color,
+									width: parseInt(pllline_width),
+								}),
+								fill: new ol.style.Fill({
+									color: plfill_color,
+								}),
+							})
+							for (var i = 0; i < send_array.length; i++) {
+								if (send_array[i].values_.layerName == style_layer_data[1]) {
+									send_array[i].style_ = newstyle;
+									listagain();
+								}
+							}
+						}
+					});
+				},
 			}
 		});
-		$("#plline_fill_color").val(style_layer_data[3]);
-		$("#pllline_width").val(style_layer_data[4]);
-		$("#plfill_color").val(style_layer_data[5]);
-		$("#plopacity").val(style_layer_data[6]);
-		$("#polygon_num").val(style_layer_data[0]);
+
 	}
 	else if (style_layer_data[data_length - 1] == 'point') {
-		$('#dialog-message1').dialog({
-			title: style_layer_data[1],
-			buttons: {
-				"SAVE": function() { $(this).dialog('close'); },
-			}
-		});
-		$('[name=point_shape]:radio[value="'+ style_layer_data[3] +'"]').prop('checked', true );
+		$('[name=point_shape]:radio[value="' + style_layer_data[3] + '"]').prop('checked', true);
 		$("#pofill_color").val(style_layer_data[4]);
 		$("#point_radius").val(style_layer_data[5]);
 		$("#popacity").val(style_layer_data[6]);
 		$("#point_num").val(style_layer_data[0]);
-	}
-	else if (style_layer_data[data_length - 1] == 'line') {
-		$('#dialog-message3').dialog({
+		$('#dialog-message1').dialog({
 			title: style_layer_data[1],
 			buttons: {
-				"SAVE": function() { $(this).dialog('close'); },
+				"SAVE": function() {
+					var point_shape = $("#point_shape").val()
+					var pofill_color = $("#pofill_color").val()
+					var point_radius = $("#point_radius").val()
+					var popacity = $("#popacity").val()
+					var point_num = $("#point_num").val()
+					$.ajax({
+						data: {
+							"point_shape": point_shape,
+							"pofill_color": pofill_color,
+							"point_radius": point_radius,
+							"popacity": popacity,
+							"point_num": point_num
+						},
+						url: "/update/style/point",
+						success: function(data) {
+							console.log("!");
+							listagain()
+
+
+						}
+					});
+				},
 			}
 		});
+	}
+	else if (style_layer_data[data_length - 1] == 'line') {
 		$("#liline_color").val(style_layer_data[3]);
 		$("#liline_width").val(style_layer_data[4]);
 		$("#liopacity").val(style_layer_data[5]);
 		$("#line_num").val(style_layer_data[0]);
+		$('#dialog-message3').dialog({
+			title: style_layer_data[1],
+			buttons: {
+				"SAVE": function() {
+					var liline_color = $("#liline_color").val()
+					var liline_width = $("#liline_width").val()
+					var liopacity = $("#liopacity").val()
+					var line_num = $("#line_num").val()
+					$.ajax({
+						data: {
+							"liline_color": liline_color,
+							"liline_width": liline_width,
+							"liopacity": liopacity,
+							"line_num": line_num,
+						},
+						url: "/update/style/line",
+						success: function(data) {
+							console.log("!");
+							listagain()
+
+
+						}
+					});
+				},
+			}
+		});
 	}
 
 
@@ -343,45 +428,64 @@ var base = new ol.layer.Tile({
 	}),
 });
 
-//Accessible Map 
-var map = new ol.Map({
-	layers: [base, alaska_layer_group],
-	target: document.getElementById('map'),
-	view: view,
-});
-
 
 //Overlay
 var layer_datas;
 var coordElement = document.getElementById('olPopup');
+var closer = document.getElementById('popup-closer');
+var content = document.getElementById('popup-content');
+
 
 var olPopup = new ol.Overlay({
 	element: coordElement,
+	autoPan: true,
+	autoPanAnimation: {
+		duration: 250,
+	},
 });
-map.addOverlay(olPopup);
+
+closer.onclick = function() {
+	olPopup.setPosition(undefined);
+	closer.blur();
+	return false;
+};
+
+//Accessible Map 
+var map = new ol.Map({
+	layers: [base, alaska_layer_group],
+	overlays: [olPopup],
+	target: document.getElementById('map'),
+	view: view,
+});
 
 map.on('click', function(evt) {
 	var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
 		layer_datas = feature.getProperties();
-		console.log(layer_datas);
 
 		return feature;
 	});
 	if (feature) {
+		var table_data = "<table><tbody>";
+
+		for (let key in layer_datas) {
+			if (key == "geometry") {
+				continue;
+			}
+			else {
+				var table_data = table_data + `<tr>
+								<th>${key}</th>
+								<td>${layer_datas[key]}</td>
+							  </tr>`;
+			}
+		}
+
+		table_data = table_data + "</tbody></table>";
+
 		var coordinate = evt.coordinate;
 
-		$(coordElement).popover('destroy');
+		content.innerHTML = `<code>${table_data}</code>`
 		olPopup.setPosition(coordinate);
-
-		$(coordElement).popover({
-			placement: 'top',
-			animation: false,
-			html: true,
-			content: '<p>데이터?</p><code>' + Object.entries(layer_datas) + '</code>',
-		});
-		$(coordElement).popover('show');
-	} else {
-		$(coordElement).popover('destroy');
+		
 	}
 });
 
@@ -394,3 +498,153 @@ map.on('pointermove', function(e) {
 	var hit = map.hasFeatureAtPixel(pixel);
 	map.getTarget().style.cursor = hit ? 'pointer' : '';
 });
+
+function listagain() {
+	$(".leftCol").empty();
+
+	$(".leftCol").append(`<h3>
+								<input type="checkbox" name="allCheckbox" id="allCheckbox"
+									class="checkSelect2"> Alaska
+							</h3>
+							<hr>`)
+	$.ajax({
+		url: "/list/raster",
+		async: false,
+		success: function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$(".leftCol").append(`<li>
+						<input value="${Object.values(data[i])}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label>${data[i].local_name}</label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updatelayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
+										<i class="fa fa-pencil-square"></i></button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										<i class="fa fa-trash-o"></i></button>
+									<input type="hidden" value="${data[i].layer_type}">
+								</span>
+							</li>`)
+
+			}
+		}
+	});
+
+	//polygon list
+	$.ajax({
+		url: "/list/polygon",
+		async: false,
+		success: function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$(".leftCol").append(`<li>
+						<input value="${Object.values(data[i])}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label>${data[i].local_name}</label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updatelayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
+										<i class="fa fa-pencil-square"></i></button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										<i class="fa fa-trash-o"></i></button>
+									<input type="hidden" value="${data[i].layer_type}">
+										
+									<!--style 변경-->	
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}">
+										<i class="fa fa-gear"></i>
+									</button>
+									
+								</span>
+							</li>`)
+
+			}
+		}
+	});
+
+	//point list
+	$.ajax({
+		url: "/list/point",
+		async: false,
+		success: function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$(".leftCol").append(`<li>
+						<input value="${Object.values(data[i])}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label>${data[i].local_name}</label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updatelayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
+										<i class="fa fa-pencil-square"></i></button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										<i class="fa fa-trash-o"></i></button>
+									<input type="hidden" value="${data[i].layer_type}">
+										
+									<!--style 변경-->	
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}">
+										<i class="fa fa-gear"></i>
+									</button>
+									
+								</span>
+							</li>`)
+
+			}
+		}
+	});
+
+	//line list
+	$.ajax({
+		url: "/list/line",
+		async: false,
+		success: function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$(".leftCol").append(`<li>
+						<input value="${Object.values(data[i])}" type="checkbox"
+								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
+								
+								<label>${data[i].local_name}</label>
+								
+								<span class="input-group-btn">
+								
+									<button id="updatelayer" name="updatelayer"
+										class="btn btn-info btn-sm"
+										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
+										<i class="fa fa-pencil-square"></i></button>
+										
+									<button id="deleteLayer" name="deleteLayer"
+										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
+										<i class="fa fa-trash-o"></i></button>
+									<input type="hidden" value="${data[i].layer_type}">
+										
+									<!--style 변경-->	
+									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
+										value="${Object.values(data[i])}"">
+										<i class="fa fa-gear"></i>
+									</button>
+									
+								</span>
+							</li>`)
+
+			}
+		}
+	});
+	checked_layer = $(".checkSelect");
+}

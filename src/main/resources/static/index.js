@@ -19,11 +19,11 @@ $.ajax({
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										레이어 수정</button>
+										<i class="fa fa-pencil-square"></i></button>
 										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										레이어 삭제</button>
+										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
 								</span>
 							</li>`)
@@ -49,11 +49,11 @@ $.ajax({
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										레이어 수정</button>
+										<i class="fa fa-pencil-square"></i></button>
 										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										레이어 삭제</button>
+										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
@@ -86,11 +86,11 @@ $.ajax({
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										레이어 수정</button>
+										<i class="fa fa-pencil-square"></i></button>
 										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										레이어 삭제</button>
+										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
@@ -123,11 +123,11 @@ $.ajax({
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
-										레이어 수정</button>
+										<i class="fa fa-pencil-square"></i></button>
 										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
-										레이어 삭제</button>
+										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
 										
 									<!--style 변경-->	
@@ -177,16 +177,16 @@ function validateupdateForm() {
 	}
 	else {
 		if (z == "raster") {
-			$("#updateForm").attr("action", "/update/raster/name");
+			$("#updateForm").attr("action", "/update/name/raster");
 		}
 		else if (z == "polygon") {
-			$("#updateForm").attr("action", "/update/polygon/name")
+			$("#updateForm").attr("action", "/update/name/polygon")
 		}
 		else if (z == "point") {
-			$("#updateForm").attr("action", "/update/point/name")
+			$("#updateForm").attr("action", "/update/name/point")
 		}
 		else if (z == "line") {
-			$("#updateForm").attr("action", "/update/line/name")
+			$("#updateForm").attr("action", "/update/name/line")
 		}
 
 		frm.submit();

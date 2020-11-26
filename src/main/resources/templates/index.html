@@ -33,8 +33,51 @@
 	height: 650px;
 }
 
-.popover-body {
-	min-width: 276px;
+.ol-popup {
+	position: absolute;
+	background-color: white;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid #cccccc;
+	bottom: 12px;
+	left: -50px;
+	min-width: 280px;
+}
+
+.ol-popup:after, .ol-popup:before {
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.ol-popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+
+.ol-popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+
+.ol-popup-closer {
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 8px;
+}
+
+.ol-popup-closer:after {
+	content: "✖";
 }
 </style>
 </head>
@@ -79,15 +122,40 @@
 		<div id="page-wrapper">
 			<!-- map -->
 			<div id="map" class="map">
+				<!-- dialog -->
+				<!-- polygon -->
+				<div id="dialog-message2" title="" style='display: none'>
+					<form id="polygon_form" name="polygon_form">
+						<h1>선</h1>
+						<br>
+						<div class="form-group">
+							<label>색상</label> <input type="color" id="plline_fill_color"
+								name="plline_fill_color">
+						</div>
+						<div class="form-group">
+							<label>굵기</label> <input id="pllline_width" name="pllline_width"
+								type="text"> px
+						</div>
+						<br>
+						<h1>면</h1>
+						<br>
+						<div class="form-group">
+							<label>색상</label> <input type="color" id="plfill_color"
+								name="plfill_color">
+						</div>
+						<label>투명도</label> <input type="range" class="custom-range"
+							id="plopacity" name="plopacity" max="1" min="0" step="0.01">
+						<input type="hidden" id="polygon_num" name="polygon_num">
+					</form>
+				</div>
+
+				<!-- point -->
 				<div id="dialog-message1" title="" style='display: none'>
-				
-				    <!-- dialog -->
 					<h1>점</h1>
 					<br>
 					<div class="form-group">
-						<label>모양</label>
-						<label class="radio-inline"> <input type="radio"
-							name="point_shape" value="circle" checked> <i
+						<label>모양</label> <label class="radio-inline"> <input
+							type="radio" name="point_shape" value="circle" checked> <i
 							class="fa fa-circle-o"></i>
 						</label> <label class="radio-inline"> <input type="radio"
 							name="point_shape" value="square"> <i
@@ -96,8 +164,7 @@
 							name="point_shape" value="triangle"> <i
 							class="glyphicon glyphicon-triangle-top"></i>
 						</label> <label class="radio-inline"> <input type="radio"
-							name="point_shape" value="star"> <i
-							class="fa fa-star"></i>
+							name="point_shape" value="star"> <i class="fa fa-star"></i>
 						</label>
 					</div>
 					<div class="form-group">
@@ -105,38 +172,14 @@
 							name="pofill_color">
 					</div>
 					<div class="form-group">
-						<label>크기</label> <input id="point_radius"
-							name="point_radius" type="text"> px
+						<label>크기</label> <input id="point_radius" name="point_radius"
+							type="text"> px
 					</div>
 					<label>투명도</label> <input type="range" class="custom-range"
-						id="popacity" name = "popacity" max="1" min="0" step="0.01">
-						<input type="hidden" id="point_num" name ="point_num">
+						id="popacity" name="popacity" max="1" min="0" step="0.01">
+					<input type="hidden" id="point_num" name="point_num">
 				</div>
-				
-				<!-- polygon -->
-				<div id="dialog-message2" title="" style='display: none'>
-					<h1>선</h1>
-					<br>
-					<div class="form-group">
-						<label>색상</label> <input type="color" id="plline_fill_color"
-							name="plline_fill_color">
-					</div>
-					<div class="form-group">
-						<label>굵기</label> <input id="pllline_width"
-							name="pllline_width" type="text"> px
-					</div>
-					<br>
-					<h1>면</h1>
-					<br>
-					<div class="form-group">
-						<label>색상</label> <input type="color" id="plfill_color"
-							name="plfill_color">
-					</div>
-					<label>투명도</label> <input type="range" class="custom-range"
-						id="plopacity" name="plopacity" max="1" min="0" step="0.01">
-						<input type="hidden" id="polygon_num" name ="polygon_num">
-				</div>
-				
+
 				<!-- line -->
 				<div id="dialog-message3" title="" style='display: none'>
 					<h1>선</h1>
@@ -146,19 +189,22 @@
 							name="liline_color">
 					</div>
 					<div class="form-group">
-						<label>굵기</label> <input id="liline_width"
-							name="liline_width"> px
+						<label>굵기</label> <input id="liline_width" name="liline_width">
+						px
 					</div>
 					<label>투명도</label> <input type="range" class="custom-range"
 						id="liopacity" name="liopacity" max="1" min="0" step="0.01">
-						<input type="hidden" id="line_num" name ="line_num">
+					<input type="hidden" id="line_num" name="line_num">
 				</div>
-				
+
 				<div style="display: none;">
-					<div id="olPopup" title="Welcome to OpenLayers"></div>
+					<div id="olPopup" class="ol-popup">
+						<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+						<div id="popup-content"></div>
+					</div>
 				</div>
 			</div>
-			
+
 			<!-- info -->
 			<div id="info">&nbsp;</div>
 			<!-- /#page-wrapper -->
