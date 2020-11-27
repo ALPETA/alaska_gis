@@ -9,25 +9,26 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
-						<div class="jbtalign">
+						<div class="row">
+						<div class="col-md-1 ">
 						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-					
+						</div>
+						<div class="jbtlabel col-md-6 ">
 								<label>${data[i].local_name}</label>
-								</div>	
+						</div>	
 								<span class="input-group-btn">
-								
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
 										<i class="fa fa-pencil-square"></i></button>
-										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-trash-o"></i></button>
-									<input type="hidden" value="${data[i].layer_type}">
+										<input type="hidden" value="${data[i].layer_type}">
 								</span>
 								<br>
+						</div>
 							</li>`)
 
 		}
@@ -41,31 +42,32 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
+						<div class="row">
+						<div class="col-md-1 ">
 						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
+						</div>
+						<div class="jbtlabel col-md-6 ">
 								<label>${data[i].local_name}</label>
-								
+						</div>
 								<span class="input-group-btn">
-								
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
 										<i class="fa fa-pencil-square"></i></button>
-										
 									<button id="deleteLayer" name="deleteLayer"
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
-										
 									<!--style 변경-->	
 									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
 										value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
-									
 								</span>
 								<br>
+								<br>
+							</div>
 							</li>`)
 
 		}
@@ -79,13 +81,15 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
+						<div class="row">
+						<div class="col-md-1 ">
 						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
+						</div>
+						<div class="jbtlabel col-md-6 ">
 								<label>${data[i].local_name}</label>
-								
+						</div>
 								<span class="input-group-btn">
-								
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
@@ -95,15 +99,15 @@ $.ajax({
 										class="btn btn-danger btn-sm" value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-trash-o"></i></button>
 									<input type="hidden" value="${data[i].layer_type}">
-										
 									<!--style 변경-->	
 									<button id="changeStyle" name="changeStyle[]" class="btn btn-success btn-sm" 
 											value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
-									
 								</span>
 								<br>
+							<br>
+							</div>
 							</li>`)
 
 		}
@@ -117,13 +121,15 @@ $.ajax({
 	success: function(data) {
 		for (var i = 0; i < data.length; i++) {
 			$(".leftCol").append(`<li>
+						<div class="row">
+						<div class="col-md-1 ">
 						<input value="${data[i].layer_num},${data[i].local_name}" type="checkbox"
 								name="checked_layer[]" id="checked_layer" class="checkSelect" data-value=""> 
-								
+						</div>
+						<div class="jbtlabel col-md-6 ">		
 								<label>${data[i].local_name}</label>
-								
+						</div>		
 								<span class="input-group-btn">
-								
 									<button id="updatelayer" name="updatelayer"
 										class="btn btn-info btn-sm"
 										value="${data[i].layer_num},${data[i].local_name},${data[i].data_name},${data[i].layer_type}">
@@ -139,9 +145,10 @@ $.ajax({
 											value="${data[i].layer_num},${data[i].layer_type}">
 										<i class="fa fa-gear"></i>
 									</button>
-									
 								</span>
 								<br>
+						</div>
+						<br>
 							</li>`)
 
 		}

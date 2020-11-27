@@ -99,13 +99,13 @@
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
 						<li class="sidebar-search">
-							<div class="input-group custom-search-form">
+							<div class="input-group custom-search-form ">
+								<button id="insertLayer" class="btn btn-primary"
+									data-toggle="modal" data-target="#insertmodal">레이어 추가</button>
 								<h3>
 									<input type="checkbox" name="allCheckbox" id="allCheckbox"
 										class="checkSelect2"> Alaska
 								</h3>
-								<button id="insertLayer" class="btn btn-primary"
-									data-toggle="modal" data-target="#insertmodal">레이어 추가</button>
 							</div> <!-- /input-group -->
 						</li>
 						<div class="jbtscroll">
@@ -120,195 +120,192 @@
 			</div>
 			<!-- /.navbar-static-side -->
 		</nav>
-</div>
-		<div id="page-wrapper">
-			<!-- map -->
-			<div id="map" class="map">
-				<!-- dialog -->
-				<!-- polygon -->
-				<div id="dialog-message2" title="" style='display: none'>
-						<h1>선</h1>
-						<br>
-						<div class="form-group">
-							<label>색상</label> <input type="color" id="plline_fill_color"
-								name="plline_fill_color">
-						</div>
-						<div class="form-group">
-							<label>굵기</label> <input id="pllline_width" name="pllline_width"
-								type="text"> px
-						</div>
-						<br>
-						<h1>면</h1>
-						<br>
-						<div class="form-group">
-							<label>색상</label> <input type="color" id="plfill_color"
-								name="plfill_color">
-						</div>
-						<label>투명도</label> <input type="range" class="custom-range"
-							id="plopacity" name="plopacity" max="1" min="0" step="0.1">
-						<input type="hidden" id="polygon_num" name="polygon_num">
+	</div>
+	<div id="page-wrapper">
+		<!-- map -->
+		<div id="map" class="map">
+			<!-- dialog -->
+			<!-- polygon -->
+			<div id="dialog-message2" title="" style='display: none'>
+				<h1>선</h1>
+				<br>
+				<div class="form-group">
+					<label>색상</label> <input type="color" id="plline_fill_color"
+						name="plline_fill_color">
 				</div>
-
-				<!-- point -->
-				<div id="dialog-message1" title="" style='display: none'>
-					<h1>점</h1>
-					<br>
-					<div class="form-group">
-						<label>모양</label> <label class="radio-inline"> <input
-							type="radio" name="point_shape" value="circle" checked> <i
-							class="fa fa-circle-o"></i>
-						</label> <label class="radio-inline"> <input type="radio"
-							name="point_shape" value="square"> <i
-							class="fa fa-square"></i>
-						</label> <label class="radio-inline"> <input type="radio"
-							name="point_shape" value="triangle"> <i
-							class="glyphicon glyphicon-triangle-top"></i>
-						</label> <label class="radio-inline"> <input type="radio"
-							name="point_shape" value="star"> <i class="fa fa-star"></i>
-						</label>
-					</div>
-					<div class="form-group">
-						<label>색상</label> <input type="color" id="pofill_color"
-							name="pofill_color">
-					</div>
-					<div class="form-group">
-						<label>크기</label> <input id="point_radius" name="point_radius"
-							type="text"> px
-					</div>
-					<label>투명도</label> <input type="range" class="custom-range"
-						id="popacity" name="popacity" max="1" min="0" step="0.1">
-					<input type="hidden" id="point_num" name="point_num">
+				<div class="form-group">
+					<label>굵기</label> <input id="pllline_width" name="pllline_width"
+						type="text"> px
 				</div>
-
-				<!-- line -->
-				<div id="dialog-message3" title="" style='display: none'>
-					<h1>선</h1>
-					<br>
-					<div class="form-group">
-						<label>색상</label> <input type="color" id="liline_color"
-							name="liline_color">
-					</div>
-					<div class="form-group">
-						<label>굵기</label> <input id="liline_width" name="liline_width">
-						px
-					</div>
-					<label>투명도</label> <input type="range" class="custom-range"
-						id="liopacity" name="liopacity" max="1" min="0" step="0.1">
-					<input type="hidden" id="line_num" name="line_num">
+				<br>
+				<h1>면</h1>
+				<br>
+				<div class="form-group">
+					<label>색상</label> <input type="color" id="plfill_color"
+						name="plfill_color">
 				</div>
-
-				<div style="display: none;">
-					<div id="olPopup" class="ol-popup">
-						<a href="#" id="popup-closer" class="ol-popup-closer"></a>
-						<div id="popup-content"></div>
-					</div>
-				</div>
+				<label>투명도</label> <input type="range" class="custom-range"
+					id="plopacity" name="plopacity" max="1" min="0" step="0.1">
+				<input type="hidden" id="polygon_num" name="polygon_num">
 			</div>
 
-			<!-- info -->
-			<div id="info">&nbsp;</div>
-			<!-- /#page-wrapper -->
+			<!-- point -->
+			<div id="dialog-message1" title="" style='display: none'>
+				<h1>점</h1>
+				<br>
+				<div class="form-group">
+					<label>모양</label> <label class="radio-inline"> <input
+						type="radio" name="point_shape" value="circle" checked> <i
+						class="fa fa-circle-o"></i>
+					</label> <label class="radio-inline"> <input type="radio"
+						name="point_shape" value="square"> <i class="fa fa-square"></i>
+					</label> <label class="radio-inline"> <input type="radio"
+						name="point_shape" value="triangle"> <i
+						class="glyphicon glyphicon-triangle-top"></i>
+					</label> <label class="radio-inline"> <input type="radio"
+						name="point_shape" value="star"> <i class="fa fa-star"></i>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>색상</label> <input type="color" id="pofill_color"
+						name="pofill_color">
+				</div>
+				<div class="form-group">
+					<label>크기</label> <input id="point_radius" name="point_radius"
+						type="text"> px
+				</div>
+				<label>투명도</label> <input type="range" class="custom-range"
+					id="popacity" name="popacity" max="1" min="0" step="0.1"> <input
+					type="hidden" id="point_num" name="point_num">
+			</div>
 
+			<!-- line -->
+			<div id="dialog-message3" title="" style='display: none'>
+				<h1>선</h1>
+				<br>
+				<div class="form-group">
+					<label>색상</label> <input type="color" id="liline_color"
+						name="liline_color">
+				</div>
+				<div class="form-group">
+					<label>굵기</label> <input id="liline_width" name="liline_width">
+					px
+				</div>
+				<label>투명도</label> <input type="range" class="custom-range"
+					id="liopacity" name="liopacity" max="1" min="0" step="0.1">
+				<input type="hidden" id="line_num" name="line_num">
+			</div>
+
+			<div style="display: none;">
+				<div id="olPopup" class="ol-popup">
+					<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+					<div id="popup-content"></div>
+				</div>
+			</div>
 		</div>
-		<!-- /#wrapper -->
 
-		<!-- 레이어 수정 modal -->
-		<form name="updateForm" id="updateForm" action="">
-			<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">레이어 내용 수정</h4>
-						</div>
+		<!-- info -->
+		<div id="info">&nbsp;</div>
+		<!-- /#page-wrapper -->
 
-						<div class="modal-body">
-							<div class="form-group">
-								<label>local name</label> <input class="form-control"
-									placeholder="local name" id="update_local_name"
-									name="update_local_name" type="text">
-							</div>
-							<div class="form-group">
-								<label>data name</label> <input class="form-control"
-									placeholder="data name" id="update_data_name"
-									name="update_data_name" type="text">
-							</div>
-							<input type="hidden" name="update_layer_num"
-								id="update_layer_num" value=""> <input type="hidden"
-								name="update_layer_type" id="update_layer_type" value="">
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- 레이어 수정 modal -->
+	<form name="updateForm" id="updateForm" action="">
+		<div id="updatemodal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">레이어 이름 변경</h4>
+					</div>
+
+					<div class="modal-body">
+						<div class="form-group">
+							<label>local name</label> <input class="form-control"
+								placeholder="local name" id="update_local_name"
+								name="update_local_name" type="text">
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary"
-								onclick="validateupdateForm()">레이어 수정</button>
+						<div class="form-group">
+							<label>data name</label> <input class="form-control"
+								placeholder="data name" id="update_data_name"
+								name="update_data_name" type="text">
 						</div>
+						<input type="hidden" name="update_layer_num" id="update_layer_num"
+							value=""> <input type="hidden" name="update_layer_type"
+							id="update_layer_type" value="">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary"
+							onclick="validateupdateForm()">수정</button>
 					</div>
 				</div>
 			</div>
-		</form>
-		<!-- 레이어 추가 modal -->
-		<form name="insertForm" id="insertForm">
-			<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
+		</div>
+	</form>
+	<!-- 레이어 추가 modal -->
+	<form name="insertForm" id="insertForm">
+		<div id="insertmodal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">새로운 레이어 추가하기</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="raster" checked> Raster
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="polygon"> Polygon
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="point"> Point
+							</label> <label class="radio-inline"> <input type="radio"
+								name="insert_layer_type" value="line"> Line
+							</label>
 						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label class="radio-inline"> <input type="radio"
-									name="insert_layer_type" value="raster" checked> Raster
-								</label> <label class="radio-inline"> <input type="radio"
-									name="insert_layer_type" value="polygon"> Polygon
-								</label> <label class="radio-inline"> <input type="radio"
-									name="insert_layer_type" value="point"> Point
-								</label> <label class="radio-inline"> <input type="radio"
-									name="insert_layer_type" value="line"> Line
-								</label>
-							</div>
-							<div class="form-group">
-								<label>local name</label> <input class="form-control"
-									placeholder="local name" id="insert_local_name"
-									name="insert_local_name">
-							</div>
-							<div class="form-group">
-								<label>data name</label> <input class="form-control"
-									placeholder="data name" id="insert_data_name"
-									name="insert_data_name">
-							</div>
+						<div class="form-group">
+							<label>local name</label> <input class="form-control"
+								placeholder="local name" id="insert_local_name"
+								name="insert_local_name">
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary"
-								onclick="validateinsertForm()">레이어 추가</button>
+						<div class="form-group">
+							<label>data name</label> <input class="form-control"
+								placeholder="data name" id="insert_data_name"
+								name="insert_data_name">
 						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary"
+							onclick="validateinsertForm()">레이어 추가</button>
 					</div>
 				</div>
 			</div>
-		</form>
-		<script th:src="@{~/jquery/js/jquery-1.12.4.js}"></script>
-		<script th:src="@{~/bootstrap/vendor/jquery/jquery.min.js}"></script>
-		<script th:src="@{~/jquery/js/jquery-ui.js}"></script>
-		<!-- jQuery -->
-		<!-- Bootstrap Core JavaScript -->
-		<script th:src="@{~/bootstrap/vendor/bootstrap/js/bootstrap.min.js}"></script>
-		<!-- Metis Menu Plugin JavaScript -->
-		<script th:src="@{~/bootstrap/vendor/metisMenu/metisMenu.min.js}"></script>
-		<!-- Morris Charts JavaScript -->
-		<script th:src="@{~/bootstrap/vendor/raphael/raphael.min.js}"></script>
-		<script th:src="@{~/bootstrap/vendor/morrisjs/morris.min.js}"></script>
-		<!-- Custom Theme JavaScript -->
-		<script th:src="@{~/bootstrap/dist/js/sb-admin-2.js}"></script>
+		</div>
+	</form>
+	<script th:src="@{~/jquery/js/jquery-1.12.4.js}"></script>
+	<script th:src="@{~/bootstrap/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{~/jquery/js/jquery-ui.js}"></script>
+	<!-- jQuery -->
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{~/bootstrap/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script th:src="@{~/bootstrap/vendor/metisMenu/metisMenu.min.js}"></script>
+	<!-- Morris Charts JavaScript -->
+	<script th:src="@{~/bootstrap/vendor/raphael/raphael.min.js}"></script>
+	<script th:src="@{~/bootstrap/vendor/morrisjs/morris.min.js}"></script>
+	<!-- Custom Theme JavaScript -->
+	<script th:src="@{~/bootstrap/dist/js/sb-admin-2.js}"></script>
 
-		<script th:src="@{~/ol/js/ol.js}"></script>
-		<script th:src="@{~/index.js}"></script>
-		<script th:src="@{~/gis/js/layer.js}"></script>
+	<script th:src="@{~/ol/js/ol.js}"></script>
+	<script th:src="@{~/index.js}"></script>
+	<script th:src="@{~/gis/js/layer.js}"></script>
 </body>
 </html>

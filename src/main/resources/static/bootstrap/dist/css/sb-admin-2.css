@@ -18,19 +18,26 @@ body {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 275px;
-    padding: 0 30px;
+    padding: 0 40px;
     border-left: 1px solid #e7e7e7;
   }
 }
-.jbtalign{
+.jbtlabel{
+  white-space: normal;
+  word-break: break-all;
+}
+
+.jbtalign3{
+  flex: 1;
   float: left;
-  margin-right: 5px;
+  margin-right: 50px;
+  box-sizing: border-box;
 }
 
 .jbtscroll{
   overflow-y: scroll;
   height: 540px;
-  width: 300px;
+  width: 310px;
 }
 
 .ulstyle{
@@ -118,7 +125,7 @@ body {
   .sidebar {
     z-index: 1;
     position: absolute;
-    width: 300px;
+    width: 310px;
     margin-top: 51px;
   }
   .navbar-top-links .dropdown-messages,
