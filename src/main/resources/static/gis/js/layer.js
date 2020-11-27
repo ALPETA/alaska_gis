@@ -76,12 +76,12 @@ function layerinput() {
 
 
 
-//changeStyle test
+//changeStyle polygon
 $(document).on("click", "#changeStyle", function() {
 	var style_layer_data = this.value;
 	style_layer_data = style_layer_data.split(',');
 	var title;
-	
+
 	if (style_layer_data[1] == 'polygon') {
 		for (var i = 0; i < polygon_datas.length; i++) {
 			if (polygon_datas[i][0] == parseInt(style_layer_data[0])) {
@@ -123,9 +123,10 @@ $(document).on("click", "#changeStyle", function() {
 								}),
 							})
 							for (var i = 0; i < send_array.length; i++) {
-								if (send_array[i].values_.layerName == style_layer_data[1]) {
-									send_array[i].style_ = newstyle;
-									send_array[i].values_.opacity=plopacity;
+								
+								if (send_array[i].values_.layerName == title) {
+									send_array[i].setStyle(newstyle);
+									send_array[i].values_.opacity = plopacity;
 								}
 							}
 							listagain()
@@ -135,6 +136,7 @@ $(document).on("click", "#changeStyle", function() {
 			}
 		});
 	}
+	//changestyle_point
 	else if (style_layer_data[1] == 'point') {
 
 		for (var i = 0; i < polygon_datas.length; i++) {
@@ -168,15 +170,62 @@ $(document).on("click", "#changeStyle", function() {
 						},
 						url: "/update/style/point",
 						success: function(data) {
+							var new_point_style;
+
+							if (point_shape == 'circle') {
+								new_point_style = new ol.style.Style({
+									image: new ol.style.Circle({
+										fill: new ol.style.Fill({ color: ppofill_color }),
+										radius: point_radius,
+									}),
+								});
+							}
+							else if (point_shape == 'square') {
+								new_point_style = new ol.style.Style({
+									image: new ol.style.RegularShape({
+										fill: new ol.style.Fill({ color: pofill_color }),
+										points: 4,
+										radius: point_radius,
+										angle: Math.PI / 4,
+									}),
+								});
+							}
+							else if (point_shape == 'triangle') {
+								new_point_style = new ol.style.Style({
+									image: new ol.style.RegularShape({
+										fill: new ol.style.Fill({ color: pofill_color }),
+										points: 3,
+										radius: point_radius,
+
+									}),
+								});
+							}
+							else if (point_shape == 'star') {
+								new_point_style = new ol.style.Style({
+									image: new ol.style.RegularShape({
+										fill: new ol.style.Fill({ color: pofill_color }),
+										points: 5,
+										radius: point_radius,
+										radius2: parseFloat(point_radius / 2.0),
+									}),
+								});
+							}
+
+							for (var i = 0; i < send_array.length; i++) {
+								
+								if (send_array[i].values_.layerName == title) {
+									send_array[i].setStyle(new_point_style);
+									send_array[i].values_.opacity = popacity;
+								}
+							}
 							listagain()
-
-
 						}
 					});
 				},
 			}
 		});
 	}
+	//change style line
 	else if (style_layer_data[1] == 'line') {
 		for (var i = 0; i < polygon_datas.length; i++) {
 			if (line_datas[i][0] == parseInt(style_layer_data[0])) {
@@ -205,9 +254,21 @@ $(document).on("click", "#changeStyle", function() {
 						},
 						url: "/update/style/line",
 						success: function(data) {
+							var new_line_style = new ol.style.Style({
+								stroke: new ol.style.Stroke({
+									color: liline_color,
+									width: liline_width,
+								}),
+							})
+
+							for (var i = 0; i < send_array.length; i++) {
+								
+								if (send_array[i].values_.layerName == title) {
+									send_array[i].setStyle(new_line_style);
+									send_array[i].values_.opacity = liopacity;
+								}
+							}
 							listagain()
-
-
 						}
 					});
 				},
