@@ -66,7 +66,6 @@ $.ajax({
 									</button>
 								</span>
 								<br>
-								<br>
 							</div>
 							</li>`)
 
@@ -106,7 +105,6 @@ $.ajax({
 									</button>
 								</span>
 								<br>
-							<br>
 							</div>
 							</li>`)
 
@@ -148,7 +146,6 @@ $.ajax({
 								</span>
 								<br>
 						</div>
-						<br>
 							</li>`)
 
 		}

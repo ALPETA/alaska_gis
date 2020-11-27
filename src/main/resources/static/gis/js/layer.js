@@ -136,7 +136,7 @@ $(document).on("click", "#changeStyle", function() {
 	}
 	//changestyle_point
 	else if (style_layer_data[1] == 'point') {
-
+		
 		for (var i = 0; i < polygon_datas.length; i++) {
 			if (point_datas[i][0] == parseInt(style_layer_data[0])) {
 				title = point_datas[i][1];
