@@ -8,8 +8,6 @@ var send_array_num = 0;
 //checkbox Array
 var checked_layer = $(".checkSelect");
 
-var check_list = [];
-
 var raster_datas = Array();
 var polygon_datas = Array();
 var point_datas = Array();
@@ -173,9 +171,10 @@ $(document).on("click", "#changeStyle", function() {
 							var new_point_style;
 
 							if (point_shape == 'circle') {
+								console.log("circle")
 								new_point_style = new ol.style.Style({
 									image: new ol.style.Circle({
-										fill: new ol.style.Fill({ color: ppofill_color }),
+										fill: new ol.style.Fill({ color: pofill_color }),
 										radius: point_radius,
 									}),
 								});
@@ -503,6 +502,9 @@ function newTileLayer(rasterData) {
 	})
 }
 
+
+
+
 var view = new ol.View({
 	center: new ol.proj.fromLonLat([-151, 60.68]),
 	maxZoom: 19,
@@ -535,6 +537,7 @@ var olPopup = new ol.Overlay({
 	},
 });
 
+//x버튼 이벤트
 closer.onclick = function() {
 	olPopup.setPosition(undefined);
 	closer.blur();
@@ -549,6 +552,7 @@ var map = new ol.Map({
 	view: view,
 });
 
+//peature 클릭 이벤트
 map.on('click', function(evt) {
 	var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
 		layer_datas = feature.getProperties();
@@ -580,6 +584,7 @@ map.on('click', function(evt) {
 	}
 });
 
+//pointermove 이벤트
 map.on('pointermove', function(e) {
 	if (e.dragging) {
 		$(coordElement).popover('destroy');
@@ -590,6 +595,7 @@ map.on('pointermove', function(e) {
 	map.getTarget().style.cursor = hit ? 'pointer' : '';
 });
 
+//업데이트 휴 data
 function listagain() {
 
 	$.ajax({
