@@ -560,7 +560,7 @@ map.on('click', function(evt) {
 		return feature;
 	});
 	if (feature) {
-		var table_data = "<table><tbody>";
+		var table_data = `<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"><tbody>`;
 
 		for (let key in layer_datas) {
 			if (key == "geometry") {
