@@ -138,7 +138,7 @@ $(document).on("click", "#changeStyle", function() {
 	//changestyle_point
 	else if (style_layer_data[1] == 'point') {
 		
-		for (var i = 0; i < polygon_datas.length; i++) {
+		for (var i = 0; i < point_datas.length; i++) {
 			if (point_datas[i][0] == parseInt(style_layer_data[0])) {
 				title = point_datas[i][1];
 				$('[name=point_shape]:radio[value="' + point_datas[i][3] + '"]').prop('checked', true);
