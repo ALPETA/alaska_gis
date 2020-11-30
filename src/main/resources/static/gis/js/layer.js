@@ -13,6 +13,7 @@ var polygon_datas = Array();
 var point_datas = Array();
 var line_datas = Array();
 
+var checkpoint = 0;
 $(document).ready(function() {
 	layerinput();
 });
@@ -290,6 +291,7 @@ $(document).on("change", ".checkSelect", function() {
 				send_array[i].setVisible(false)
 				$("#allCheckbox").prop("checked", false);
 				$("#allCheckbox").removeClass("active");
+				checkpoint = checkpoint-1;
 			}
 		}
 		$(this).removeClass("active")
@@ -299,6 +301,13 @@ $(document).on("change", ".checkSelect", function() {
 			if (send_array[i].values_.layerName == layer_name) {
 				send_array[i].setVisible(true);
 				$(this).addClass("active")
+				
+				checkpoint = checkpoint+1;
+				for(var r = 0; r < send_array.length;r++){
+					if(checkpoint == send_array.length){
+						$("#allCheckbox").prop("checked", true);
+					}
+				}
 			}
 		}
 	}
@@ -314,7 +323,8 @@ $(document).on("change", "#allCheckbox", function() {
 			var datas = checked_layer[i].value;
 			datas = datas.split(',');
 			var data_name = datas[1];
-
+			checkpoint = send_array.length;
+			
 			for (var r = 0; r < send_array.length; r++) {
 
 				if (send_array[r].values_.layerName == data_name) {
@@ -338,6 +348,7 @@ $(document).on("change", "#allCheckbox", function() {
 			var datas = checked_layer[i].value;
 			datas = datas.split(',');
 			var data_name = datas[1];
+			checkpoint = 0;
 
 			for (var r = 0; r < send_array.length; r++) {
 
