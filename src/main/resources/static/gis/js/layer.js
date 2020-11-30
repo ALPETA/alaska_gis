@@ -227,7 +227,7 @@ $(document).on("click", "#changeStyle", function() {
 	}
 	//change style line
 	else if (style_layer_data[1] == 'line') {
-		for (var i = 0; i < polygon_datas.length; i++) {
+		for (var i = 0; i < line_datas.length; i++) {
 			if (line_datas[i][0] == parseInt(style_layer_data[0])) {
 				title = line_datas[i][1];
 				$("#liline_color").val(line_datas[i][3]);
