@@ -563,7 +563,7 @@ var map = new ol.Map({
 	view: view,
 });
 
-//peature 클릭 이벤트
+//Feature 클릭 이벤트
 map.on('click', function(evt) {
 	var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
 		layer_datas = feature.getProperties();
